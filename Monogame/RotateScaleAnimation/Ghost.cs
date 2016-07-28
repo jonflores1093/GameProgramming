@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.GamerServices;
+//using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
-using IntroGameLibrary;
-using IntroGameLibrary.Sprite2;
-using IntroGameLibrary.Util;
+using MonoGameLibrary;
+using MonoGameLibrary.Sprite2;
+using MonoGameLibrary.Util;
 
 namespace RotateScaleAnimation
 {

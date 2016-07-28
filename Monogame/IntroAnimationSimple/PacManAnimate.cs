@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
+//using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
@@ -15,7 +15,7 @@ namespace IntroAnimtionSimple
     /// <summary>
     /// This is a game component that implements IUpdateable.
     /// </summary>
-    public class PacManAnimate : IntroGameLibrary.Sprite2.Sprite2
+    public class PacManAnimate : MonoGameLibrary.Sprite2.Sprite2
     {
 
         int framesizeX, framesizeY, maxFrame, currentFrame;

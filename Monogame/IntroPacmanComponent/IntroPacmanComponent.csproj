@@ -73,7 +73,12 @@
     <Content Include="GameThumbnail.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\MonoGameLibrary\MonoGameLibrary.csproj">
+      <Project>{8e4593c7-3740-4853-a8da-e3eb6477469e}</Project>
+      <Name>MonoGameLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="..\XNA4Content\XNA4Content\bin\PSM\Content\food.xnb">
       <Link>Content\food.xnb</Link>
@@ -84,12 +89,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\IntroGameLibrary\IntroGameLibrary.csproj">
-      <Project>{923e5582-6232-4f85-9365-46a10fd0a68c}</Project>
-      <Name>IntroGameLibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
-using IntroGameLibrary;
-using IntroGameLibrary.State;
+using MonoGameLibrary;
+using MonoGameLibrary.State;
 #endregion
 
 namespace IntroScreenz

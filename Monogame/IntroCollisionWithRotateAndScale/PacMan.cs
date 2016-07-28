@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.GamerServices;
+//using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
-using IntroGameLibrary;
-using IntroGameLibrary.Sprite2;
-using IntroGameLibrary.Util;
+using MonoGameLibrary;
+using MonoGameLibrary.Sprite2;
+using MonoGameLibrary.Util;
 
 namespace IntroGameCollisionRotate
 {
@@ -34,6 +34,7 @@ namespace IntroGameCollisionRotate
 
         protected override void LoadContent()
         {
+            base.LoadContent();
             spriteTexture = content.Load<Texture2D>("PacManSingle");
             Location = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
             Direction = new Vector2(1, 0);
@@ -47,7 +48,7 @@ namespace IntroGameCollisionRotate
             this.SpriteTextureData =
                 new Color[this.spriteTexture.Width * this.spriteTexture.Height];
             this.spriteTexture.GetData(this.SpriteTextureData);
-
+            
 
         }
 

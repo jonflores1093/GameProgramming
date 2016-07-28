@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-using Microsoft.Xna.Framework.GamerServices;
+//using Microsoft.Xna.Framework.GamerServices;
 
 
 
@@ -22,7 +22,7 @@ namespace IntroGameLibrary.Sprite2
         public SpriteEffects SpriteEffects;
         public Rectangle LocationRect { get { return locationRect; } set { locationRect = value; } }    //current location
         public Color[] SpriteTextureData;
-        protected Texture2D spriteTexture;  //current Texture
+        public Texture2D spriteTexture;  //current Texture
         public Texture2D SpriteTexture
         {
             get { return spriteTexture; }
@@ -90,7 +90,7 @@ namespace IntroGameLibrary.Sprite2
         {
 
             //Load texture for sprite Markers
-            this.SpriteMarkersTexture = content.Load<Texture2D>("SpriteMarker");
+           this.SpriteMarkersTexture = content.Load<Texture2D>("SpriteMarker");
             
             //top left orgin
             this.Orgin = Vector2.Zero;
@@ -120,37 +120,23 @@ namespace IntroGameLibrary.Sprite2
 
         public virtual void SetTranformAndRect()
         {
+            //The first time this is called the spritetexture may not be loaded
+            //try and catch is too slow
+            if (this.spriteTexture != null)
+            {
+                    // Build the block's transform
+                    spriteTransform =
+                        Matrix.CreateTranslation(new Vector3(this.Orgin * -1, 0.0f)) *
+                        Matrix.CreateScale(this.Scale) *
+                        Matrix.CreateRotationZ(0.0f) *
+                        Matrix.CreateTranslation(new Vector3(this.Location, 0.0f));
 
-            try
-            {
-                // Build the block's transform
-                spriteTransform =
-                    Matrix.CreateTranslation(new Vector3(this.Orgin * -1, 0.0f)) *
-                    Matrix.CreateScale(this.Scale) *
-                    Matrix.CreateRotationZ(0.0f) *
-                    Matrix.CreateTranslation(new Vector3(this.Location, 0.0f));
-
-                // Calculate the bounding rectangle of this block in world space
-                this.locationRect = CalculateBoundingRectangle(
-                         new Rectangle(0, 0, this.spriteTexture.Width,
-                             this.spriteTexture.Height),
-                         spriteTransform);
-            }
-            catch (NullReferenceException nu)
-            {
-                //nothing
-                if (this.spriteTexture == null)
-                {
-                    //first time this will fail because load content hasn't been called yet
-                }
-                else
-                {
-                    throw nu;
-                }
-            }
-            catch( Exception ex)
-            {
-                throw ex;
+                    // Calculate the bounding rectangle of this block in world space
+                    this.locationRect = CalculateBoundingRectangle(
+                             new Rectangle(0, 0, this.spriteTexture.Width,
+                                 this.spriteTexture.Height),
+                             spriteTransform);
+                
             }
         }
 

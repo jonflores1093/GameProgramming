@@ -11,7 +11,7 @@
     <RootNamespace>IntroChaseEvade</RootNamespace>
     <AssemblyName>IntroChaseEvade</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -56,9 +56,6 @@
     <Reference Include="Lidgren.Network">
       <HintPath>$(MSBuildExtensionsPath)\..\MonoGame\v3.0\Assemblies\WindowsGL\Lidgren.Network.dll</HintPath>
     </Reference>
-    <Reference Include="Tao.Sdl">
-      <HintPath>$(MSBuildExtensionsPath)\..\MonoGame\v3.0\Assemblies\WindowsGL\Tao.Sdl.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -71,15 +68,14 @@
     <Content Include="GameThumbnail.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
+    <ProjectReference Include="..\MonoGameLibrary\MonoGameLibrary.csproj">
+      <Project>{8e4593c7-3740-4853-a8da-e3eb6477469e}</Project>
+      <Name>MonoGameLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IntroGameLibrary\IntroGameLibrary.csproj">
-      <Project>{923e5582-6232-4f85-9365-46a10fd0a68c}</Project>
-      <Name>IntroGameLibrary</Name>
-    </ProjectReference>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\XNA4Content\XNA4Content\bin\PSM\Content\GhostHit.xnb">

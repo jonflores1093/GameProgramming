@@ -14,7 +14,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
-using IntroGameLibrary.ThreeD;
+using MonoGameLibrary.ThreeD;
 #endregion
 
 namespace Intro3dShootFixed

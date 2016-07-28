@@ -4,13 +4,13 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
+//using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using IntroGameLibrary.Sprite;
-using IntroGameLibrary.Util;
-using IntroGameLibrary.Sprite2;
+using MonoGameLibrary.Sprite;
+using MonoGameLibrary.Util;
+using MonoGameLibrary.Sprite2;
 
 
 namespace Particles

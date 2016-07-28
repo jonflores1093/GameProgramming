@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
+//using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Net;
+//using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
 
 namespace IntroSimpleSpriteWindows
@@ -53,6 +53,13 @@ namespace IntroSimpleSpriteWindows
             // TODO: use this.Content to load your game content here
             PacMan = Content.Load<Texture2D>("pacmanSingle");
             PacManLoc = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
+
+            //this.TargetElapsedTime = TimeSpan.FromSeconds(1.0f / 30.0f);
+
+            //Monogame fullscreen deosn't work for directX using full size borderless screen
+           
+            Window.IsBorderless = true;
+            //Window.Position = new Point(screen.Bounds.X, screen.Bounds.Y);
         }
 
         /// <summary>

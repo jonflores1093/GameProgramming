@@ -5,8 +5,8 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using IntroGameLibrary.State;
-using IntroGameLibrary.Util;
+using MonoGameLibrary.State;
+using MonoGameLibrary.Util;
 using Microsoft.Xna.Framework.Input;
 
 namespace IntroScreenz

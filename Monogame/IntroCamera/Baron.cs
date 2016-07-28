@@ -14,8 +14,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
-using IntroGameLibrary;
-using IntroGameLibrary.ThreeD;
+using MonoGameLibrary;
+using MonoGameLibrary.ThreeD;
 #endregion
 
 namespace IntroCamera

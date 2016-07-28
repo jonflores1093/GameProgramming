@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.GamerServices;
+//using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
-using IntroGameLibrary;
-using IntroGameLibrary.Sprite;
-using IntroGameLibrary.Util;
+using MonoGameLibrary;
+using MonoGameLibrary.Sprite;
+using MonoGameLibrary.Util;
 
 namespace IntroPacManComponentsFromLibrary
 {
     class PacMan : DrawableSprite
     {
-        int pi;
+        int pi; //player index for controller
 
         //Services
         InputHandler input;

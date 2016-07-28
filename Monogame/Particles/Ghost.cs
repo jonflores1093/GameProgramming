@@ -2,17 +2,17 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.GamerServices;
+//using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
-using IntroGameLibrary;
-using IntroGameLibrary.Sprite;
-using IntroGameLibrary.Sprite2;
-using IntroGameLibrary.Util;
-using IntroGameLibrary.Events;
-using IntroGameLibrary.Particle;
+using MonoGameLibrary;
+using MonoGameLibrary.Sprite;
+using MonoGameLibrary.Sprite2;
+using MonoGameLibrary.Util;
+using MonoGameLibrary.Events;
+using MonoGameLibrary.Particle;
 
 namespace Particles
 {

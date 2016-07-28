@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
 
 namespace IntroSimpleSpriteUpdateWindows
@@ -22,7 +20,7 @@ namespace IntroSimpleSpriteUpdateWindows
         Texture2D PacMan;
         Vector2 PacManLoc;      //Pacman location
         Vector2 PacManDir;      //Pacman direction
-        float PacManSpeed, PacManMaxSpeed, PacManAcceloration;              //speed for the PacMan Sprite in pixels per frame per second
+        float PacManSpeed, PacManMaxSpeed, PacManAcceleration;              //speed for the PacMan Sprite in pixels per frame per second
 
         bool PacManUseMomentum = false;
 
@@ -31,7 +29,8 @@ namespace IntroSimpleSpriteUpdateWindows
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            //TargetElapsedTime = TimeSpan.FromTicks(333333);
+            //Change the frame fate to 30 Frames per second the default is 60fps
+            TargetElapsedTime = TimeSpan.FromTicks(333333); // you may need to add using System; to get the TimeSpan function
         }
 
         /// <summary>
@@ -63,9 +62,9 @@ namespace IntroSimpleSpriteUpdateWindows
                 graphics.GraphicsDevice.Viewport.Height / 2);
             PacManDir = new Vector2(1, 0);
             
-            PacManSpeed = 200;
-            PacManMaxSpeed = 1000;
-            PacManAcceloration = 2;
+            PacManSpeed = 20;          //initial pacman speed
+            PacManMaxSpeed = 1000;      //maximum pacman speed
+            PacManAcceleration = 2;
         }
 
         /// <summary>
@@ -104,10 +103,10 @@ namespace IntroSimpleSpriteUpdateWindows
 
             //Move PacMan
             //Simple move Moves PacMac by PacManDiv on every update
-            //PacManLoc = PacManLoc + PacManDir * PacManSpeed;
+            PacManLoc = PacManLoc + PacManDir * PacManSpeed;      //no good not time corrected
 
             //Time corrected move. MOves PacMan By PacManDiv every Second
-            PacManLoc = PacManLoc + ((PacManDir * PacManSpeed) * (time/1000));      //Simple Move PacMan by PacManDir
+            //PacManLoc = PacManLoc + ((PacManDir * PacManSpeed) * (time/1000));      //Simple Move PacMan by PacManDir
 
             HandleInput();
 
@@ -159,14 +158,14 @@ namespace IntroSimpleSpriteUpdateWindows
                 {
                     if (PacManSpeed > 0)
                     {
-                        PacManSpeed -= PacManAcceloration;
+                        PacManSpeed -= PacManAcceleration;
                     }
                 }
                 else
                 {
                     if (PacManSpeed < PacManMaxSpeed)
                     {
-                        PacManSpeed += PacManAcceloration;
+                        PacManSpeed += PacManAcceleration;
                     }
                 }
             }

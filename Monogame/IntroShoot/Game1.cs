@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
+//using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Net;
+//using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
 
 namespace IntroShoot
@@ -201,7 +201,7 @@ namespace IntroShoot
 
                 //Normalize NewDir to keep agled movement at same speed as horilontal/Vert
                 PacManKeyDir = Vector2.Normalize(PacManKeyDir);
-                 PacManDir += PacManKeyDir;
+                 PacManDir = PacManKeyDir;
 
                 PacManLoc += ((PacManKeyDir * (time / 1000)) * PacManSpeed);      //Simple Move PacMan by PacManDir
             }
@@ -221,13 +221,13 @@ namespace IntroShoot
                 PacManLoc.Y = (PacMan.Height /2 );
 
             //Shoot
-            if (gamePad1State.Buttons.A == ButtonState.Pressed)
+            if (gamePad1State.Buttons.A == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 Shot s = new Shot(this);
                 
                 s.Location = PacManLoc;
                 s.Direction = PacManDir;
-                s.Speed = PacManSpeed * 10;
+                s.Speed = Math.Max(PacManSpeed, 1) * 4;
                 this.Components.Add(s);
             }
             

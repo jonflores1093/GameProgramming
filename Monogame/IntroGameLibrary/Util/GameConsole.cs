@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.GamerServices;
+//using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
@@ -38,7 +38,7 @@ namespace IntroGameLibrary.Util
         protected int maxLines;
         public int MaxLines { get { return maxLines; } set { maxLines = value; } }
 
-        SpriteFont font;
+        //SpriteFont font;
         SpriteBatch spriteBatch;
         ContentManager content;
 
@@ -78,7 +78,7 @@ namespace IntroGameLibrary.Util
         protected override void LoadContent()
         {
             
-            font = content.Load<SpriteFont>("content/Arial");
+            //font = content.Load<SpriteFont>("content/Arial");
             spriteBatch = new SpriteBatch(GraphicsDevice);
             base.LoadContent();
         }
@@ -111,17 +111,22 @@ namespace IntroGameLibrary.Util
             
             if(input.KeyboardState.HasReleasedKey(ToggleConsoleKey))
             {
-                if (this.gameConsoleState == GameConsoleState.Closed)
-                {
-                    this.gameConsoleState = GameConsoleState.Open;
-                }
-                else
-                {
-                    this.gameConsoleState = GameConsoleState.Closed;
-                }
+                this.ToggleConsole();   
             }
             
             base.Update(gameTime);
+        }
+
+        public void ToggleConsole()
+        {
+            if (this.gameConsoleState == GameConsoleState.Closed)
+            {
+                this.gameConsoleState = GameConsoleState.Open;
+            }
+            else
+            {
+                this.gameConsoleState = GameConsoleState.Closed;
+            }
         }
 
         public override void Draw(GameTime gameTime)
@@ -132,8 +137,8 @@ namespace IntroGameLibrary.Util
                 //4.0 change
                 //spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteS2rtMode.Deferred, SaveStateMode.SaveState);
                 spriteBatch.Begin();
-                spriteBatch.DrawString(font, GetGameConsoleText(), Vector2.Zero, Color.Wheat);
-                spriteBatch.DrawString(font, debugText, new Vector2(200f,0f), Color.Wheat);
+               //spriteBatch.DrawString(font, GetGameConsoleText(), Vector2.Zero, Color.Wheat);
+               //spriteBatch.DrawString(font, debugText, new Vector2(200f,0f), Color.Wheat);
                 spriteBatch.End();
             }
             base.Draw(gameTime);

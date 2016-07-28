@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.GamerServices;
+//using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
-using IntroGameLibrary;
-using IntroGameLibrary.Sprite2;
-using IntroGameLibrary.Util;
+using MonoGameLibrary;
+using MonoGameLibrary.Sprite2;
+using MonoGameLibrary.Util;
 
 namespace PacManManAnimation
 {
@@ -142,6 +142,8 @@ namespace PacManManAnimation
             
 
             Vector2 PacManKeyDir = new Vector2(0, 0);
+
+            
 
             if (input.KeyboardState.IsKeyDown(Keys.Left))
             {

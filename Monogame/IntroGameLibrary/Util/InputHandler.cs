@@ -89,11 +89,13 @@ namespace IntroGameLibrary.Util
             {
                 // TODO: Add your update code here
                 if (keyboard.IsKeyDown(Keys.Escape))
-                    Game.Exit();
+                    //Monogame does't allow this anymore
+                    //Game.Exit();
 
                 // Allows the default game to exit on Xbox 360 and Windows
-                if (gamePadHandler.WasButtonPressed(0, ButtonType.Back))
-                    Game.Exit();
+                if (gamePadHandler.WasButtonPressed(0, ButtonType.Back)) { }
+                    //Monogame doesn't allow this anymore
+                    //Game.Exit();
             }
 
 #if !XBOX360
