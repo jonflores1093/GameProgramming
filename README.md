@@ -3,7 +3,7 @@ Code for Game Programming Course
 
 Monogame samples are in the Monogame folder
   
-  Monogame samples are built with Monogame 3.6 http://www.monogame.net/
+  Monogame samples are built with Monogame 3.5 http://www.monogame.net/
   
 Unity Samples are in the unity folder
   
