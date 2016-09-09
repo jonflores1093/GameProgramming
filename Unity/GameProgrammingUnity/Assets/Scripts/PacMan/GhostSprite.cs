@@ -43,7 +43,7 @@ public class GhostSprite : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		this.transform.position = Util.BounceOffWalls(this.transform.position, renderer.bounds.size.x -1 , renderer.bounds.size.y -1, ref this.ghost.Direction);
+		this.transform.position = Util.BounceOffWalls(this.transform.position, GetComponent<Renderer>().bounds.size.x -1 , GetComponent<Renderer>().bounds.size.y -1, ref this.ghost.Direction);
 
 		switch(this.State)
 		{

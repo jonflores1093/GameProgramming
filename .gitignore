@@ -162,6 +162,8 @@ node_modules/
 # RIA/Silverlight projects
 Generated_Code/
 
+
+
 # Backup & report files from converting an old project file
 # to a newer Visual Studio version. Backup files are not needed,
 # because we have git ;-)
@@ -181,3 +183,6 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+
+#SNV http://stackoverflow.com/questions/821895/exclude-svn-folders-within-git
+.svn*

@@ -9,9 +9,9 @@ public class Util : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		bottomLeft = camera.ScreenToWorldPoint(Vector3.zero);
-		topRight = camera.ScreenToWorldPoint(new Vector3(
-			camera.pixelWidth, camera.pixelHeight));
+		bottomLeft = GetComponent<Camera>().ScreenToWorldPoint(Vector3.zero);
+		topRight = GetComponent<Camera>().ScreenToWorldPoint(new Vector3(
+			GetComponent<Camera>().pixelWidth, GetComponent<Camera>().pixelHeight));
 			
 		cameraRect = new Rect(
 			bottomLeft.x,
