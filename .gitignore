@@ -186,3 +186,6 @@ FakesAssemblies/
 
 #SNV http://stackoverflow.com/questions/821895/exclude-svn-folders-within-git
 .svn*
+
+#unity library
+Library/
