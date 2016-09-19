@@ -170,13 +170,13 @@ namespace SimpleMovementWGravity
         private void UpdatePacmanSpeed()
         {
             //Speed for next frame
-            if (Keyboard.GetState().GetPressedKeys().Length > 0)
+            if (Keyboard.GetState().GetPressedKeys().Length > 0) //If there is any key press the legth of the Array of keys returned by GetPressedKeys wil be greater that 0
             {
-                PacManSpeed = 200;
+                PacManSpeed = 200;  //Key down pacman has speed
             }
             else
             {
-                PacManSpeed = 0;
+                PacManSpeed = 0;    //No key down stop
             }
 
         }

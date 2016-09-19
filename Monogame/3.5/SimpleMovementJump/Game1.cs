@@ -152,19 +152,21 @@ namespace SimpleMovementJump
                 if ((!(inputKeyboard.IsHoldingKey(Keys.Left))) &&
                     (!(inputKeyboard.IsHoldingKey(Keys.Right))))
                 {
-                    if (PacManDir.X > 0)
+                    if (PacManDir.X > 0) //If the pacman has a positive direction in X(moving right)
                     {
-                        PacManDir.X = Math.Max(0, PacManDir.X - Friction);
+                        PacManDir.X = Math.Max(0, PacManDir.X - Friction); //Reduce X by friction amount but don't go below 0 
                     }
-                    else
+                    else //Else pacman has a negative direction.X (moving left)
                     {
-                        PacManDir.X = Math.Min(0, PacManDir.X + Friction);
+                        PacManDir.X = Math.Min(0, PacManDir.X + Friction); //Add friction amount until X is 0
                     }
+                    //Zero X is stopped so if you're no holding a key friction will slow down the movement until pacman stops
                 }
 
+                //If keys left or Right key is down acceorate up to make speed
                 if (inputKeyboard.IsHoldingKey(Keys.Left))
                 {
-                    PacManDir.X = Math.Max((PacManSpeedMax * -1.0f), PacManDir.X - Accel);
+                    PacManDir.X = Math.Max((PacManSpeedMax * -1.0f), PacManDir.X - Accel); 
                 }
                 if (inputKeyboard.IsHoldingKey(Keys.Right))
                 {

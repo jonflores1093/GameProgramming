@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace SimpleUpdateMovement
+namespace SimpleUpdateMovementWState
 {
     /// <summary>
     /// This is the main type for your game.
@@ -139,7 +139,7 @@ namespace SimpleUpdateMovement
                     PacManSpeed = 200;
                     break;
                 case PacManMovementState.OnKey:
-                    if (Keyboard.GetState().GetPressedKeys().Length > 0)
+                    if (Keyboard.GetState().GetPressedKeys().Length > 0) //If there is any key press the legth of the Array of keys returned by GetPressedKeys wil be greater that 0
                     {
                         PacManSpeed = 200;
                     }
@@ -150,7 +150,7 @@ namespace SimpleUpdateMovement
                     break;
                 case PacManMovementState.Momentum:
                     //slowdown no keys pressed accelerate on keys
-                    if (Keyboard.GetState().GetPressedKeys().Length == 0)
+                    if (Keyboard.GetState().GetPressedKeys().Length == 0) //If there is any key press the legth of the Array of keys returned by GetPressedKeys wil be greater that 0
                     {
                         if (PacManSpeed > 0)
                         {
@@ -167,7 +167,7 @@ namespace SimpleUpdateMovement
                     break;
                 case PacManMovementState.Influnence:
                     PacManSpeed = 1;
-                    if (PacManDir.Length() - PacManSpeed > PacManMaxSpeed)
+                    if (PacManDir.Length() - PacManSpeed > PacManMaxSpeed)  //Pac man is moving but not at his max speed
                     {
                         PacManDir = Vector2.Normalize(PacManDir) * PacManAcceloration;
 
@@ -175,7 +175,7 @@ namespace SimpleUpdateMovement
                     //slowdown no keys pressed
                     if (Keyboard.GetState().GetPressedKeys().Length == 0)
                     {
-                        PacManDir = Vector2.Lerp(PacManDir, Vector2.Zero, .05f);
+                        PacManDir = Vector2.Lerp(PacManDir, Vector2.Zero, .05f); //slowdown until speed reaches 0
                     }
                     break;
             }

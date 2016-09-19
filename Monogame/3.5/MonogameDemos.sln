@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsProject", "WindowsProject\WindowsProject.csproj", "{ECCFECB9-08F7-46A8-B88C-B060F5DB95F9}"
 EndProject
@@ -38,6 +38,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Week3", "Week3", "{151A83BF-4331-4A5F-AF23-E6EE77E0A4CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpritebatchOptions", "SpritebatchOptions\SpritebatchOptions.csproj", "{48AE92EC-4CB5-474D-B9D1-5EF6DCCF47F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Week4", "Week4", "{1E337B71-FD70-43CA-B79E-C52F03D0EC45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PacManSprite2Component", "PacManSprite2Component\PacManSprite2Component.csproj", "{773138DC-4A06-4A35-AC7B-55289DCB9F4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMovementWRotate", "SimpleMovementWRotate\SimpleMovementWRotate.csproj", "{CED78F4E-3D5F-43CC-99D4-1FD5FE6FF539}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -185,6 +191,26 @@ Global
 		{48AE92EC-4CB5-474D-B9D1-5EF6DCCF47F4}.Release|Mixed Platforms.Build.0 = Release|x86
 		{48AE92EC-4CB5-474D-B9D1-5EF6DCCF47F4}.Release|x86.ActiveCfg = Release|x86
 		{48AE92EC-4CB5-474D-B9D1-5EF6DCCF47F4}.Release|x86.Build.0 = Release|x86
+		{773138DC-4A06-4A35-AC7B-55289DCB9F4D}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{773138DC-4A06-4A35-AC7B-55289DCB9F4D}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{773138DC-4A06-4A35-AC7B-55289DCB9F4D}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{773138DC-4A06-4A35-AC7B-55289DCB9F4D}.Debug|x86.ActiveCfg = Debug|x86
+		{773138DC-4A06-4A35-AC7B-55289DCB9F4D}.Debug|x86.Build.0 = Debug|x86
+		{773138DC-4A06-4A35-AC7B-55289DCB9F4D}.Release|Any CPU.ActiveCfg = Release|x86
+		{773138DC-4A06-4A35-AC7B-55289DCB9F4D}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{773138DC-4A06-4A35-AC7B-55289DCB9F4D}.Release|Mixed Platforms.Build.0 = Release|x86
+		{773138DC-4A06-4A35-AC7B-55289DCB9F4D}.Release|x86.ActiveCfg = Release|x86
+		{773138DC-4A06-4A35-AC7B-55289DCB9F4D}.Release|x86.Build.0 = Release|x86
+		{CED78F4E-3D5F-43CC-99D4-1FD5FE6FF539}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{CED78F4E-3D5F-43CC-99D4-1FD5FE6FF539}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{CED78F4E-3D5F-43CC-99D4-1FD5FE6FF539}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{CED78F4E-3D5F-43CC-99D4-1FD5FE6FF539}.Debug|x86.ActiveCfg = Debug|x86
+		{CED78F4E-3D5F-43CC-99D4-1FD5FE6FF539}.Debug|x86.Build.0 = Debug|x86
+		{CED78F4E-3D5F-43CC-99D4-1FD5FE6FF539}.Release|Any CPU.ActiveCfg = Release|x86
+		{CED78F4E-3D5F-43CC-99D4-1FD5FE6FF539}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{CED78F4E-3D5F-43CC-99D4-1FD5FE6FF539}.Release|Mixed Platforms.Build.0 = Release|x86
+		{CED78F4E-3D5F-43CC-99D4-1FD5FE6FF539}.Release|x86.ActiveCfg = Release|x86
+		{CED78F4E-3D5F-43CC-99D4-1FD5FE6FF539}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -202,5 +228,7 @@ Global
 		{7272E621-C7BE-41DE-9805-48D6736987F9} = {EAF6B06E-14C8-42BE-85C4-DD1A305AB790}
 		{91555EEA-6FC8-4DA3-804B-4465194530D8} = {4DA5DA38-A06D-44AC-95A2-10DC68533B53}
 		{48AE92EC-4CB5-474D-B9D1-5EF6DCCF47F4} = {151A83BF-4331-4A5F-AF23-E6EE77E0A4CE}
+		{773138DC-4A06-4A35-AC7B-55289DCB9F4D} = {1E337B71-FD70-43CA-B79E-C52F03D0EC45}
+		{CED78F4E-3D5F-43CC-99D4-1FD5FE6FF539} = {151A83BF-4331-4A5F-AF23-E6EE77E0A4CE}
 	EndGlobalSection
 EndGlobal
