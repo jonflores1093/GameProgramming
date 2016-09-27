@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace PacManSprite2Component
+namespace FPS
 {
     /// <summary>
     /// This is the main type for your game.
@@ -12,19 +12,15 @@ namespace PacManSprite2Component
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        PacMan pac1;
-        Ghost redGhost;
+
+        FPSClass FPSClass;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            pac1 = new PacMan(this);
-            redGhost = new Ghost(this);
-
-            this.Components.Add(pac1);
-            this.Components.Add(redGhost);
+            
         }
 
         /// <summary>
@@ -49,7 +45,7 @@ namespace PacManSprite2Component
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            
+            FPSClass = new FPSClass(this); //try to move to constructor
         }
 
         /// <summary>
@@ -83,6 +79,7 @@ namespace PacManSprite2Component
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            FPSClass.Draw(gameTime);
 
             // TODO: Add your drawing code here
 

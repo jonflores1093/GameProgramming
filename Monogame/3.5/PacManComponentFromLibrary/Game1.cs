@@ -1,8 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGameLibrary.Util;
 
-namespace PacManSprite2Component
+namespace PacManComponentFromLibrary
 {
     /// <summary>
     /// This is the main type for your game.
@@ -12,19 +13,21 @@ namespace PacManSprite2Component
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        PacMan pac1;
-        Ghost redGhost;
+        InputHandler input; //Delcare input service
+        PacMan pacMan;  //Delcare PacMan domponent
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            pac1 = new PacMan(this);
-            redGhost = new Ghost(this);
+            //Services
+            input = new InputHandler(this);
+            this.Components.Add(input);
 
-            this.Components.Add(pac1);
-            this.Components.Add(redGhost);
+            //Components
+            pacMan = new PacMan(this);
+            this.Components.Add(pacMan);
         }
 
         /// <summary>
@@ -49,7 +52,7 @@ namespace PacManSprite2Component
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            
+            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>

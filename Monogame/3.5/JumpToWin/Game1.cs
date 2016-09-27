@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace PacManSprite2Component
+namespace JumpToWin
 {
     /// <summary>
     /// This is the main type for your game.
@@ -12,19 +12,15 @@ namespace PacManSprite2Component
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        PacMan pac1;
-        Ghost redGhost;
+        PacMan pac;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            pac1 = new PacMan(this);
-            redGhost = new Ghost(this);
-
-            this.Components.Add(pac1);
-            this.Components.Add(redGhost);
+            pac = new PacMan(this);
+            this.Components.Add(pac);
         }
 
         /// <summary>
@@ -49,7 +45,7 @@ namespace PacManSprite2Component
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            
+            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>

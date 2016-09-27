@@ -145,8 +145,6 @@ namespace PacManSprite2Component
             }
             #endregion
 #endif
-
-
         }
 
     }

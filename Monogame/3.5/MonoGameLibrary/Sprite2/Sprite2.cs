@@ -20,7 +20,8 @@ namespace MonoGameLibrary.Sprite2
         public Vector2 Location, Direction, Orgin;  //Origin atsrts at top left
         public float Speed, Rotate;
         public SpriteEffects SpriteEffects;
-        public Rectangle LocationRect { get { return locationRect; } set { locationRect = value; } }    //current location
+        public Rectangle LocationRect { get { return locationRect; } set { locationRect = value; } }    //current location used for collision
+                                                                             
         public Color[] SpriteTextureData;
         public Texture2D spriteTexture;  //current Texture
         public Texture2D SpriteTexture
@@ -41,6 +42,7 @@ namespace MonoGameLibrary.Sprite2
         protected GraphicsDeviceManager graphics;
         protected float lastUpdateTime;   
         protected Rectangle locationRect; //current location
+        private Rectangle rectangle; //used as drawing target
         protected float scale;
         public float Scale
         {
@@ -72,6 +74,7 @@ namespace MonoGameLibrary.Sprite2
             // TODO: Construct any child components here
             content = game.Content;
             this.Scale = 1;
+            rectangle = new Rectangle();
         }
 
         /// <summary>
@@ -115,7 +118,16 @@ namespace MonoGameLibrary.Sprite2
             //SpriteEffects = SpriteEffects.None;       //Default Sprite Effects
             SetTranformAndRect();
 
+            updateRectangeForDrawing();
             base.Update(gameTime);
+        }
+
+        private void updateRectangeForDrawing()
+        {
+            rectangle.X = (int)Location.X;
+            rectangle.Y = (int)Location.Y;
+            rectangle.Width = (int)(spriteTexture.Width * this.Scale);
+            rectangle.Height = (int)(spriteTexture.Height * this.Scale);
         }
 
         public virtual void SetTranformAndRect()
@@ -133,37 +145,25 @@ namespace MonoGameLibrary.Sprite2
 
                     // Calculate the bounding rectangle of this block in world space
                     this.locationRect = CalculateBoundingRectangle(
-                             new Rectangle(0, 0, this.spriteTexture.Width,
-                                 this.spriteTexture.Height),
+                             new Rectangle(0, 0, (int)(this.spriteTexture.Width * Scale),
+                                 (int)(this.spriteTexture.Height * Scale)),
                              spriteTransform);
-                
             }
         }
 
         public virtual void Draw(SpriteBatch sb)
         {
-            //Don't nee this the spriteTransform handles the rectangle now
-            //this.locationRect = new Rectangle(
-            //        (int)Location.X - (int)this.Orgin.X,
-            //        (int)Location.Y - (int)this.Orgin.Y,
-            //        (int)(spriteTexture.Width * this.Scale),
-            //        (int)(spriteTexture.Height * this.Scale));
 
             
-              sb.Draw(spriteTexture,
-                new Rectangle(
-                    (int)Location.X,
-                    (int)Location.Y,
-                    (int)(spriteTexture.Width * this.Scale),
-                    (int)(spriteTexture.Height * this.Scale)),
+            sb.Draw(spriteTexture,
+                rectangle,
                 null,
                 Color.White,
                 MathHelper.ToRadians(Rotate),
                 this.Orgin,
                 SpriteEffects,
                 0);
-            
-            
+
             DrawMarkers(sb);
     
         }
