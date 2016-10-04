@@ -11,15 +11,30 @@ using MonoGameLibrary;
 using MonoGameLibrary.Sprite2;
 using MonoGameLibrary.Util;
 
-namespace PacManComponentFromLibrary
+namespace Collision
 {
+
+    public enum PacState
+    {
+        Spawning, Stopped, Chomping, Dying, Dead, PoweredUp
+    }
+
     class PacMan : DrawableSprite2
     {
         int playerIndex; //player index for controller
 
         //Services
         InputHandler input;
-        
+        GameConsole console;
+        ScoreService score;
+
+        //State
+        protected PacState pacstate;
+        public PacState Pacstate
+        {
+            get { return pacstate; }
+            protected set { this.pacstate = value; }
+        }
         
         public PacMan(Game game)
             : base(game)
@@ -27,6 +42,8 @@ namespace PacManComponentFromLibrary
             // TODO: Construct any child components her
             playerIndex = 0;
 
+            //PacMan Depends on some game sevices
+        #region Dependancy Services
             input = (InputHandler)game.Services.GetService(typeof(IInputHandler));
 
             //Make sure input service exists
@@ -35,13 +52,33 @@ namespace PacManComponentFromLibrary
                 throw new Exception("PacMan Depends on Input service please add input service before you add PacMan.");
             }
 
-           
+            console = (GameConsole)game.Services.GetService(typeof(IGameConsole));
+            //Make sure input service exists
+            if (console == null)
+            {
+                throw new Exception("PacMan Depends on Console service please add Console service before you add PacMan.");
+            }
+
+            score = (ScoreService)game.Services.GetService(typeof(IScoreService));
+            //Make sure input service exists
+            if (console == null)
+            {
+                throw new Exception("PacMan Depends on Score service please add Score service before you add PacMan.");
+            }
+        #endregion
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            UpdatePacMan(lastUpdateTime, gameTime);
+            switch ( this.Pacstate)
+            {
+                case PacState.Chomping:
+                case PacState.Stopped:
+                    UpdatePacMan(lastUpdateTime, gameTime);
+                    break;
+            }
+            
             
         }
 
@@ -54,6 +91,7 @@ namespace PacManComponentFromLibrary
             base.LoadContent();
             this.Orgin = new Vector2(this.spriteTexture.Width / 2, this.spriteTexture.Height / 2);
             this.Scale = 1;
+            this.Pacstate = PacState.Stopped;
         }
         
         private void UpdatePacMan(float lastUpdateTime, GameTime gameTime)
@@ -178,7 +216,8 @@ namespace PacManComponentFromLibrary
             }
             #endregion
 #endif
-        
+
+            console.DebugText = this.Location.ToString();
 
         }
 
