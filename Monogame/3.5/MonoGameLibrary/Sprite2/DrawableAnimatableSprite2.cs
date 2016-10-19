@@ -80,7 +80,7 @@ namespace MonoGameLibrary.Sprite2
             {
                 // Build the block's transform
                 spriteTransform =
-                    Matrix.CreateTranslation(new Vector3(this.Orgin * -1, 0.0f)) *
+                    Matrix.CreateTranslation(new Vector3(this.Origin * -1, 0.0f)) *
                     Matrix.CreateScale(this.Scale) *
                     Matrix.CreateRotationZ(0.0f) *
                     Matrix.CreateTranslation(new Vector3(this.Location, 0.0f));
@@ -120,7 +120,7 @@ namespace MonoGameLibrary.Sprite2
                 currentTextureRect,
                 Color.White,
                 MathHelper.ToRadians(Rotate),
-                this.Orgin,
+                this.Origin,
                 SpriteEffects,
                 0);
             

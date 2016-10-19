@@ -52,7 +52,7 @@ namespace PacManComponentFromLibrary
             this.Location = new Vector2(300, 300);
             this.Speed = 100;
             base.LoadContent();
-            this.Orgin = new Vector2(this.spriteTexture.Width / 2, this.spriteTexture.Height / 2);
+            this.Origin = new Vector2(this.spriteTexture.Width / 2, this.spriteTexture.Height / 2);
             this.Scale = 1;
         }
         

@@ -48,7 +48,7 @@ namespace Collision
             this.Location = new Vector2(100 + (100 * ghostCount), 100 ); //offset based on ghostcount
             this.Speed = 100;
             base.LoadContent();
-            this.Orgin = new Vector2(this.spriteTexture.Width / 2, this.spriteTexture.Height / 2);
+            this.Origin = new Vector2(this.spriteTexture.Width / 2, this.spriteTexture.Height / 2);
             this.Scale = 1;
             this.Ghoststate = GhostState.Stopped;
         }

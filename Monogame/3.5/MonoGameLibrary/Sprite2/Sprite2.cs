@@ -17,7 +17,7 @@ namespace MonoGameLibrary.Sprite2
     /// </summary>
     public class Sprite2 : Microsoft.Xna.Framework.DrawableGameComponent
     {
-        public Vector2 Location, Direction, Orgin;  //Origin atsrts at top left
+        public Vector2 Location, Direction, Origin;  //Origin starts at top left
         public float Speed, Rotate;
         public SpriteEffects SpriteEffects;
         public Rectangle LocationRect { get { return locationRect; } set { locationRect = value; } }    //current location used for collision
@@ -96,7 +96,7 @@ namespace MonoGameLibrary.Sprite2
            this.SpriteMarkersTexture = content.Load<Texture2D>("SpriteMarker");
             
             //top left orgin
-            this.Orgin = Vector2.Zero;
+            this.Origin = Vector2.Zero;
             
             //center orgin
             //this.Orgin = new Vector2(this.spriteTexture.Width / 2, this.spriteTexture.Height / 2);
@@ -138,7 +138,7 @@ namespace MonoGameLibrary.Sprite2
             {
                     // Build the block's transform
                     spriteTransform =
-                        Matrix.CreateTranslation(new Vector3(this.Orgin * -1, 0.0f)) *
+                        Matrix.CreateTranslation(new Vector3(this.Origin * -1, 0.0f)) *
                         Matrix.CreateScale(this.Scale) *
                         Matrix.CreateRotationZ(0.0f) *
                         Matrix.CreateTranslation(new Vector3(this.Location, 0.0f));
@@ -160,7 +160,7 @@ namespace MonoGameLibrary.Sprite2
                 null,
                 Color.White,
                 MathHelper.ToRadians(Rotate),
-                this.Orgin,
+                this.Origin,
                 SpriteEffects,
                 0);
 

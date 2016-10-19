@@ -18,7 +18,7 @@ namespace SimpleMovementWGravity
         float PacManSpeed; //speed for the PacMan Sprite in pixels per frame per second
 
         //Gravity
-        float PacManSpeedMax;           //Max speed for the pac man sprite
+        //float PacManSpeedMax;           //Max speed for the pac man sprite
         Vector2 GravityDir;             //Gravity Direction normalized victor
         float GravityAccel;             //Gavity Acceloration
 
@@ -70,7 +70,7 @@ namespace SimpleMovementWGravity
 
             //Pacman spped 
             PacManSpeed = 10;
-            PacManSpeedMax = 20;
+            //PacManSpeedMax = 20;
 
             GravityDir = new Vector2(0, 1);
             GravityAccel = 1.8f;
