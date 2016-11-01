@@ -22,7 +22,7 @@ public class GhostSprite : MonoBehaviour {
 	
 	
 	void OnTriggerEnter2D(Collider2D coll) {
-        if (coll.gameObject.tag == "Player")
+        if (coll.gameObject.tag == "Player") //Make sure player is tagged 
         {
             if (this.State == GhostState.Dead)
             {
