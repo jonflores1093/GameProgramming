@@ -31,7 +31,8 @@ namespace PacManGame.Food
         {
             this.pac = pac;
             this.console = (GameConsole)this.Game.Services.GetService<IGameConsole>();
-            
+            foods = new List<Food>();
+            sfoods = new List<SuperFood>();
         }
 
         /// <summary>

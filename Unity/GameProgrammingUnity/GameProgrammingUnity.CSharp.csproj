@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Observer\IObserver.cs" />
     <Compile Include="Assets\Scripts\Observer\ISubject.cs" />
+    <Compile Include="Assets\Scripts\PacMan\DaneMovement.cs" />
     <Compile Include="Assets\Scripts\PacMan\Food.cs" />
     <Compile Include="Assets\Scripts\PacMan\Ghost.cs" />
     <Compile Include="Assets\Scripts\PacMan\GhostController.cs" />

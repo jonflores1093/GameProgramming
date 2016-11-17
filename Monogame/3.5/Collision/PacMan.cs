@@ -78,8 +78,6 @@ namespace Collision
                     UpdatePacMan(lastUpdateTime, gameTime);
                     break;
             }
-            
-            
         }
 
         protected override void LoadContent()
