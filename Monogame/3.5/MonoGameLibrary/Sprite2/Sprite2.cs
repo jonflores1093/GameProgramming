@@ -67,7 +67,7 @@ namespace MonoGameLibrary.Sprite2
         }
         protected Texture2D SpriteMarkersTexture;
 
-
+        private Viewport vp;
         public Sprite2(Game game)
             : base(game)
         {
@@ -75,6 +75,7 @@ namespace MonoGameLibrary.Sprite2
             content = game.Content;
             this.Scale = 1;
             rectangle = new Rectangle();
+            
         }
 
         /// <summary>
@@ -91,7 +92,6 @@ namespace MonoGameLibrary.Sprite2
 
         protected override void LoadContent()
         {
-
             //Load texture for sprite Markers
            this.SpriteMarkersTexture = content.Load<Texture2D>("SpriteMarker");
             
@@ -99,11 +99,8 @@ namespace MonoGameLibrary.Sprite2
             this.Origin = Vector2.Zero;
             
             //center orgin
-            //this.Orgin = new Vector2(this.spriteTexture.Width / 2, this.spriteTexture.Height / 2);
+            //this.Origin = new Vector2(this.spriteTexture.Width / 2, this.spriteTexture.Height / 2);
             base.LoadContent();
-
-
-
         }
 
         /// <summary>
@@ -219,14 +216,28 @@ namespace MonoGameLibrary.Sprite2
         /// viewport.</returns>
         protected Vector2 clampToViewport(Vector2 vector)
         {
-            Viewport vp = graphics.GraphicsDevice.Viewport;
+            vp = graphics.GraphicsDevice.Viewport;
             vector.X = MathHelper.Clamp(vector.X, vp.X, vp.X + vp.Width);
             vector.Y = MathHelper.Clamp(vector.Y, vp.Y, vp.Y + vp.Height);
             return vector;
         }
 
+        public virtual bool IsOffScreen()
+        {
+            vp = graphics.GraphicsDevice.Viewport;
+            if((this.Location.X + this.SpriteTexture.Width ) <= (0 - this.Origin.X) || 
+                this.Location.X >= (vp.Width - this.Origin.X) ||
+                (this.Location.Y + this.SpriteTexture.Height) <= (0 - this.Origin.Y) ||
+                this.Location.Y - this.SpriteTexture.Height >= (vp.Height - this.Origin.Y))
+            {
+                return true;
+            }
+            
+            return false;
+        }
+
         #region Sprite Collision
-        
+
         /// <summary>
         /// Checks for intersection of this sprite and another sprite
         /// </summary>

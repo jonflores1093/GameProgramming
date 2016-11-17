@@ -26,6 +26,8 @@ namespace MonoGameLibrary.Util
 
         string fps;
 
+        GameConsole console;
+
         public FPS(Game game, bool synchWithVerticalRetrace, bool isFixedTimeStep)
             : this(game, synchWithVerticalRetrace, isFixedTimeStep,
                    game.TargetElapsedTime) { }
@@ -45,7 +47,9 @@ namespace MonoGameLibrary.Util
             Game.TargetElapsedTime = targetElapsedTime;
 
             updateTimeFixed = Game.IsFixedTimeStep;
-            graphics.ApplyChanges(); 
+            graphics.ApplyChanges();
+
+            console = (GameConsole)this.Game.Services.GetService<IGameConsole>();
         }
 
         public void ToggleTimeFixed()
@@ -126,12 +130,27 @@ namespace MonoGameLibrary.Util
         {
 #if DEBUG
             frameCounter++;
-            fps = string.Format("fps: {0}", frameRate);
+            fps = string.Format("fps: {0} slow:{1}", frameRate, gameTime.IsRunningSlowly);
 #if XBOX360
+            //if gamecomponent GameConsole is present use if not use System.Diagnostics
+            if(console == null)
+            {
                 System.Diagnostics.Debug.WriteLine("FPS: " + fps);
+            }
+            else
+            {
+                console.Log("fps", fps);
+            }
 #else
-            //int fps = (int)Math.Round(1.0 / gameTime.ElapsedGameTime.TotalSeconds);    
-            //Game.Window.Title = "FPS: " + fps + " " + gameTime.IsRunningSlowly;
+            //if gamecomponent GameConsole is present use if not use the Game.Window.Title
+            if (console == null)
+            {
+                Game.Window.Title = fps;
+            }
+            else
+            {
+                console.Log("fps", fps);
+            }
 #endif   
 #endif
             base.Draw(gameTime);
