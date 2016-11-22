@@ -18,8 +18,7 @@ namespace ShotManager
         Shot Shoot();
         Shot Shoot(Shot s);
         string ShotTexture { get; set; }
-        float LimitShotRate { get; set; }   //Limits shots to X per second
-        int MaxShots { get; set; }   //Limits shots to X per second
+        
     }
     
     public class ShotManager : Microsoft.Xna.Framework.GameComponent, IShotManager
@@ -38,18 +37,8 @@ namespace ShotManager
         }
         List<Shot> shotsToRemove { get; set; }  //list of shots to be removed on Update is a shot is not enabled
         public string ShotTexture { get; set; } //Texture for shot
-        protected float limitShotRateForMiliseconds, limitShotRateMilisecondsTimer, limitShotRate;
-        public float LimitShotRate {
-            get { return limitShotRate; }
-            set {
-                limitShotRate = value;
-                limitShotRateForMiliseconds = limitShotRate * 1000;
-            }
-        } //limit shots to X per second
-
-        public int MaxShots { get; set; }
-
-        Shot s = null; //default reference to shot to be reused
+        
+        protected Shot s = null; //default reference to shot to be reused
         
         public ShotManager(Game game) : base(game)
         {
@@ -73,7 +62,6 @@ namespace ShotManager
 
         public virtual Shot Shoot(Shot shot)
         {
-            if (!CheckTimerToAllowShot()) return null;
             s = shot;
             if (!String.IsNullOrEmpty(this.ShotTexture))
             {
@@ -82,23 +70,9 @@ namespace ShotManager
            
             s.Initialize();
             this.addShot(s);
-            limitShotRateMilisecondsTimer = limitShotRateForMiliseconds;
             return s;
         }
 
-        private bool CheckTimerToAllowShot()
-        {
-            if (limitShotRate > 0)
-            {
-                if ((limitShotRateMilisecondsTimer > 0)
-                    || (this.Shots.Count >= MaxShots)
-                )
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
         #endregion
         protected virtual void addShot(Shot s)
         {
@@ -112,9 +86,6 @@ namespace ShotManager
 
         public override void Update(GameTime gameTime)
         {
-            //If shot rate is limited use timer 0 means unlimited
-            if (limitShotRateMilisecondsTimer > 0)
-                this.limitShotRateMilisecondsTimer -= gameTime.ElapsedGameTime.Milliseconds;
             shotsToRemove.Clear(); //clear old shots to be removed
 
             //Update each shot in the Shots Collection

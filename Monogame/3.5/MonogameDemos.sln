@@ -75,6 +75,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spawner", "Spawner\Spawner.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShotManager", "ShotManager\ShotManager.csproj", "{D1294335-BAC7-4E3E-924C-0BECF69C98F5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Audio", "Audio", "{A0D08C54-DCE5-4607-98C5-F3165A83600C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioSimple", "AudioSimple\AudioSimple.csproj", "{8D0FEF4D-C13C-46E5-97E0-C2864B961DB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -363,6 +367,16 @@ Global
 		{D1294335-BAC7-4E3E-924C-0BECF69C98F5}.Release|Mixed Platforms.Build.0 = Release|x86
 		{D1294335-BAC7-4E3E-924C-0BECF69C98F5}.Release|x86.ActiveCfg = Release|x86
 		{D1294335-BAC7-4E3E-924C-0BECF69C98F5}.Release|x86.Build.0 = Release|x86
+		{8D0FEF4D-C13C-46E5-97E0-C2864B961DB1}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{8D0FEF4D-C13C-46E5-97E0-C2864B961DB1}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{8D0FEF4D-C13C-46E5-97E0-C2864B961DB1}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{8D0FEF4D-C13C-46E5-97E0-C2864B961DB1}.Debug|x86.ActiveCfg = Debug|x86
+		{8D0FEF4D-C13C-46E5-97E0-C2864B961DB1}.Debug|x86.Build.0 = Debug|x86
+		{8D0FEF4D-C13C-46E5-97E0-C2864B961DB1}.Release|Any CPU.ActiveCfg = Release|x86
+		{8D0FEF4D-C13C-46E5-97E0-C2864B961DB1}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{8D0FEF4D-C13C-46E5-97E0-C2864B961DB1}.Release|Mixed Platforms.Build.0 = Release|x86
+		{8D0FEF4D-C13C-46E5-97E0-C2864B961DB1}.Release|x86.ActiveCfg = Release|x86
+		{8D0FEF4D-C13C-46E5-97E0-C2864B961DB1}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -392,5 +406,6 @@ Global
 		{71936C9C-BA14-43E9-BFE6-381D3123AB22} = {779D7974-DE7E-47D0-BDF6-6E57AFB4D128}
 		{736DB662-F73D-495D-BD78-24DE9E4DF46F} = {779D7974-DE7E-47D0-BDF6-6E57AFB4D128}
 		{E3316241-3748-449C-B492-1DF0A5F78C37} = {779D7974-DE7E-47D0-BDF6-6E57AFB4D128}
+		{8D0FEF4D-C13C-46E5-97E0-C2864B961DB1} = {A0D08C54-DCE5-4607-98C5-F3165A83600C}
 	EndGlobalSection
 EndGlobal
