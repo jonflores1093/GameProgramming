@@ -10,26 +10,27 @@ using Microsoft.Xna.Framework.Content;
 
 namespace MonoGameLibrary
 {
+    /// <summary>
+    /// Interface for CelAnimationManager
+    /// </summary>
     public interface ICelAnimationManager { }
-
 
     /// <summary>
     /// A game service that manages animations.
     /// </summary>
     public sealed partial class CelAnimationManager : Microsoft.Xna.Framework.GameComponent, ICelAnimationManager
     {
+        //Dictionary that contains a string key name for each animation
         private Dictionary<string, CelAnimation> animations = new Dictionary<string, CelAnimation>();
+        //Dictionary that contains a string key name for each Texture
         private Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
-        private ContentManager content;
-        private string contentPath;
+        
         public Dictionary<string, CelAnimation> Animations { get { return animations; } }
         
         public CelAnimationManager(Game game)
             : base(game)
         {
-            content = game.Content;
-            contentPath = game.Content.RootDirectory;
-
+            //Add CellAnimationManager to game as a service (singleton) using the Interface ICelAnimationManager as the type
             game.Services.AddService(typeof(ICelAnimationManager), this);
         }
 
@@ -38,18 +39,25 @@ namespace MonoGameLibrary
             base.Initialize();
         }
 
-        //Adds and animation
+        /// <summary>
+        /// Adds an animation to the CellAnimation Manager
+        /// </summary>
+        /// <param name="animationKey">Key for Animation Namr</param>
+        /// <param name="textureName">Texture2D Name from Pipeline tool</param>
+        /// <param name="celCount">Number of Cells in Animation. CelCount has Number of Rows and Number of Columns</param>
+        /// <param name="framesPerSecond">Frame Rate to play back animation in frames per secong</param>
         public void AddAnimation(string animationKey, string textureName,
             CelCount celCount, int framesPerSecond)
         {
+            //Make sure texture is unique
             if (!textures.ContainsKey(textureName))
             {
-                
-                textures.Add(textureName, content.Load<Texture2D>(textureName));
+                //Add texture to Dictionary using Texture Name
+                textures.Add(textureName, this.Game.Content.Load<Texture2D>(textureName));
             }
 
-            int celWidth = (int)(textures[textureName].Width / celCount.NumberOfColumns);
-            int celHeight = (int)(textures[textureName].Height / celCount.NumberOfRows);
+            int celWidth = (int)(textures[textureName].Width / celCount.NumberOfColumns); //find cell width by diving Texture Width by number Columns
+            int celHeight = (int)(textures[textureName].Height / celCount.NumberOfRows);  // find cell height by diving Texture Width by number of Rows
 
             int numberOfCels = celCount.NumberOfColumns * celCount.NumberOfRows;
 
@@ -63,9 +71,19 @@ namespace MonoGameLibrary
                 framesPerSecond);
         }
 
+        /// <summary>
+        /// Adds an animation to the CellAnimation Manager using a different Texture Key and Texture2D
+        /// </summary>
+        /// <param name="animationKey">Key for Animation Namr</param>
+        /// <param name="textureName">Texture2D Name from Pipeline tool</param>
+        /// <param name="celCount">Number of Cells in Animation. CelCount has Number of Rows and Number of Columns</param>
+        /// <param name="framesPerSecond">Frame Rate to play back animation in frames per secong</param>
+        /// <param name="texture">Texture 2D to load</param>
+        
         public void AddAnimation(string animationKey, string textureName,
             Texture2D texture, CelCount celCount, int framesPerSecond)
         {
+            if (texture == null) this.Game.Content.Load<Texture2D>(textureName);
             if (!textures.ContainsKey(textureName))
             {
                 
@@ -95,7 +113,7 @@ namespace MonoGameLibrary
 
             if (!textures.ContainsKey(textureName))
             {
-                textures.Add(textureName, content.Load<Texture2D>(contentPath + textureName));
+                textures.Add(textureName, this.Game.Content.Load<Texture2D>(textureName));
             }
 
             ca.CelWidth = celWidth;
@@ -154,19 +172,14 @@ namespace MonoGameLibrary
                 if (ca.Paused)
                     continue; //no need to update this animation, check next one
 
-
                 ca.TotalElapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 if (ca.TotalElapsedTime > ca.TimePerFrame)
-                {
-                    
+                {                   
                     ca.Frame++;
-                    
-
-                    //min: 0, max: total cels
+                   //min: 0, max: total cels
                     if (ca.Frame >= ca.NumberOfCels)
                     {
                         ca.LoopCount++;
-                        
                     }
                     ca.Frame = ca.Frame % (ca.NumberOfCels);
 
@@ -298,11 +311,8 @@ namespace MonoGameLibrary
             batch.Draw(textures[ca.TextureName], position, cel, color, 0.0f, orgin, 1.0f, SpriteEffects.None, 0f);
            
             //batch.Draw(textures[ca.TextureName], position, cel, color);
-        }
-
-       
+        }   
     }
-
     public class CelAnimation
     {
         private string textureName;

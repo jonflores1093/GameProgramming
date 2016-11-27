@@ -45,6 +45,8 @@
     <Compile Include="Events\Event.cs" />
     <Compile Include="Events\EventArgs.cs" />
     <Compile Include="Events\EventData.cs" />
+    <Compile Include="GameComponents\Audio\SoundSimpleComponent.cs" />
+    <Compile Include="GameComponents\Player\PlayerController.cs" />
     <Compile Include="Network\ClientInfo.cs" />
     <Compile Include="Network\GameClient.cs" />
     <Compile Include="Network\GameNetwork.cs" />
@@ -57,7 +59,7 @@
     <Compile Include="Sprite2\DrawableAnimatableSprite2.cs" />
     <Compile Include="Sprite2\DrawableSprite2.cs" />
     <Compile Include="Sprite2\Sprite2.cs" />
-    <Compile Include="Sprite\CelAnimationManager.cs" />
+    <Compile Include="Sprite2\CelAnimationManager.cs" />
     <Compile Include="Sprite\DrawableAnimatableSprite.cs" />
     <Compile Include="Sprite\DrawableSprite.cs" />
     <Compile Include="Sprite\Sprite.cs" />

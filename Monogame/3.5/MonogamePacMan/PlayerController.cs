@@ -15,7 +15,7 @@ namespace MonogamePacMan
         public Vector2 Direction { get; private set; }
         public float Rotate { get; private set; }
 
-        //Checks to see if there is anymovement
+        //Checks to see if there is any movement
         public bool hasInputForMoverment
         {
             get

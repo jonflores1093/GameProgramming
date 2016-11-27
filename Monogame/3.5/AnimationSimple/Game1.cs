@@ -1,10 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MonoGameLibrary.Util;
-using Pac;
 
-namespace PacManGame
+namespace AnimationSimple
 {
     /// <summary>
     /// This is the main type for your game.
@@ -14,31 +12,14 @@ namespace PacManGame
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        InputHandler input;
-        GameConsole console;
-
-        Pac.MonogamePacMan pac;
-       
-        Ghost.GhostManager gm;
-
-        Food.FoodManager fm;
+        PacManAnimate pac;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            input = new InputHandler(this);
-            console = new GameConsole(this);
-
-            this.Components.Add(input);
-            this.Components.Add(console);
-
-            pac = new Pac.MonogamePacMan(this);
-            gm = new Ghost.GhostManager(this, pac);
-            fm = new Food.FoodManager(this, pac);
-            this.Components.Add(fm);
-            this.Components.Add(gm);
+            pac = new PacManAnimate(this);
             this.Components.Add(pac);
         }
 
@@ -64,7 +45,10 @@ namespace PacManGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            //Cache game textures
+            Content.Load<Texture2D>("pacmanTwo");
+            Content.Load<Texture2D>("pacmanDie");
+
         }
 
         /// <summary>
@@ -99,8 +83,10 @@ namespace PacManGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
-            console.Log("Rotate", pac.Rotate.ToString());
+            spriteBatch.Begin();
+            pac.Draw(spriteBatch);
+            spriteBatch.End();
+
             base.Draw(gameTime);
         }
     }

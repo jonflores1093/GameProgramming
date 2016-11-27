@@ -150,9 +150,7 @@ namespace MonoGameLibrary.Sprite2
 
         public virtual void Draw(SpriteBatch sb)
         {
-
-            
-            sb.Draw(spriteTexture,
+            sb.Draw(spriteTexture,  
                 rectangle,
                 null,
                 Color.White,
@@ -160,9 +158,8 @@ namespace MonoGameLibrary.Sprite2
                 this.Origin,
                 SpriteEffects,
                 0);
-
+        
             DrawMarkers(sb);
-    
         }
 
         protected void DrawMarkers(SpriteBatch sb)

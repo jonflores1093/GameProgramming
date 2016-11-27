@@ -11,7 +11,7 @@ namespace ShotManager
     class MousePaint : ShotManager
     {
         InputHandler input;
-        Shot s;
+        
 
         float shrinkTime, shrinkTimer;
 

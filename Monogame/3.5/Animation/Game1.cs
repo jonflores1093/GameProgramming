@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGameLibrary.Util;
 using Pac;
 
-namespace PacManGame
+namespace Animation
 {
     /// <summary>
     /// This is the main type for your game.
@@ -17,11 +17,7 @@ namespace PacManGame
         InputHandler input;
         GameConsole console;
 
-        Pac.MonogamePacMan pac;
-       
-        Ghost.GhostManager gm;
-
-        Food.FoodManager fm;
+        MGAnimatedPacMan pac;
 
         public Game1()
         {
@@ -30,16 +26,12 @@ namespace PacManGame
 
             input = new InputHandler(this);
             console = new GameConsole(this);
-
             this.Components.Add(input);
             this.Components.Add(console);
 
-            pac = new Pac.MonogamePacMan(this);
-            gm = new Ghost.GhostManager(this, pac);
-            fm = new Food.FoodManager(this, pac);
-            this.Components.Add(fm);
-            this.Components.Add(gm);
+            pac = new MGAnimatedPacMan(this);
             this.Components.Add(pac);
+
         }
 
         /// <summary>
@@ -86,7 +78,10 @@ namespace PacManGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            if(input.KeyboardState.HasReleasedKey(Keys.D))
+            {
+                pac.Die(this.input);
+            }
 
             base.Update(gameTime);
         }
@@ -98,9 +93,6 @@ namespace PacManGame
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
-            console.Log("Rotate", pac.Rotate.ToString());
             base.Draw(gameTime);
         }
     }

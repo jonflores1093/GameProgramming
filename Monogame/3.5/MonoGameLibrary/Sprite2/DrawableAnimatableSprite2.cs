@@ -23,9 +23,8 @@ namespace MonoGameLibrary.Sprite2
         public DrawableAnimatableSprite2(Game game)
             : base(game)
         {
-            // TODO: Construct any child components here
-            //content = game.Content;
-            spriteAnimationAdapter = new SpriteAnimationAdapter(game);
+            
+            spriteAnimationAdapter = new SpriteAnimationAdapter(game, this);
         }
 
         /// <summary>
@@ -34,16 +33,14 @@ namespace MonoGameLibrary.Sprite2
         /// </summary>
         public override void Initialize()
         {
-            // TODO: Add your initialization code here
-            //graphics = (GraphicsDeviceManager)Game.Services.GetService(typeof(IGraphicsDeviceManager));
             base.Initialize();
+            spriteAnimationAdapter.Initialize();
+            
         }
 
         protected override void LoadContent()
         {
-
-            //spriteBatch = new SpriteBatch(graphics.GraphicsDevice);
-            
+            spriteAnimationAdapter.LoadContent();
             base.LoadContent();
         }
 
@@ -54,12 +51,13 @@ namespace MonoGameLibrary.Sprite2
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            // TODO: Add your update code here
             //Elapsed time since last update
             lastUpdateTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            //GamePad1
+            
             SpriteEffects = SpriteEffects.None;       //Default Sprite Effects
-            this.spriteTexture = this.spriteAnimationAdapter.CurrentTexture;        //update texture for collision
+            if(this.spriteAnimationAdapter.HasAnimations)
+                this.spriteTexture = this.spriteAnimationAdapter.CurrentTexture;        //update texture for collision
+               
             base.Update(gameTime);
 
             currentTextureRect = spriteAnimationAdapter.GetCurrentDrawRect(lastUpdateTime, this.scale);
@@ -75,7 +73,6 @@ namespace MonoGameLibrary.Sprite2
 
         public override void SetTranformAndRect()
         {
-
             try
             {
                 // Build the block's transform
@@ -139,7 +136,6 @@ namespace MonoGameLibrary.Sprite2
         /// <returns></returns>
         public override bool PerPixelCollision2(Sprite2 OtherSprite)
         {
-
             return IntersectPixels(this.spriteTransform, 
                 this.currentTextureRect.Width,
                 this.currentTextureRect.Height, 
@@ -148,20 +144,26 @@ namespace MonoGameLibrary.Sprite2
                 OtherSprite.SpriteTexture.Width,
                 OtherSprite.SpriteTexture.Height,
                 OtherSprite.SpriteTextureData);
-
         }
-      
     }
-
-
-
-    
 
     public class SpriteAnimationAdapter
     {
         List<SpriteAnimation> spriteAnimations;
         protected SpriteAnimation currentAnimation;
         protected CelAnimationManager celAnimationManger;
+
+        protected Texture2D defaultTexture; //only used if no sprite animations are set
+        protected Sprite2 parent;
+        public bool HasAnimations
+        {
+            get
+            {
+                if (currentAnimation != null)
+                    return true;
+                return false;
+            }
+        }
 
         public Rectangle CurrentLocationRect
         {
@@ -183,21 +185,38 @@ namespace MonoGameLibrary.Sprite2
             }
         }
               
-        public SpriteAnimationAdapter(Game game)
+        public SpriteAnimationAdapter(Game game, Sprite2 sprite)
         {
+            this.parent = sprite;
             spriteAnimations = new List<SpriteAnimation>();
             
             celAnimationManger = (CelAnimationManager)game.Services.GetService(typeof(ICelAnimationManager));
             if (celAnimationManger == null)
             {
-                throw new Exception("To use a DrawableAnimatedSprite you must a CelAnimationManager to the game as a service!");
+                //throw new Exception("To use a DrawableAnimatedSprite you must a CelAnimationManager to the game as a service!");
+                celAnimationManger = new CelAnimationManager(game);
+                game.Components.Add(celAnimationManger);
+            }   
+        }
+
+        public void LoadContent()
+        {
+            this.defaultTexture = parent.SpriteTexture;
+            if (parent.SpriteTexture == null)
+            {
+                parent.Initialize();
+                this.defaultTexture = parent.SpriteTexture;
             }
-            
         }
 
         public Texture2D CurrentTexture
         {
-            get { return celAnimationManger.GetTexture(currentAnimation.TextureName); }
+            get {
+                if(currentAnimation == null)
+                {
+                    return this.defaultTexture;
+                }
+                return celAnimationManger.GetTexture(currentAnimation.TextureName); }
         }
 
         public void AddAnimation(SpriteAnimation s)
@@ -241,7 +260,11 @@ namespace MonoGameLibrary.Sprite2
 
         public Rectangle GetCurrentDrawRect(float elapsedTime, float scale)
         {
-            Rectangle drawRect = this.CelAnimationManager.GetCurrentDrawRect(elapsedTime, currentAnimation.AnimationName, scale);
+            Rectangle drawRect;
+            if (this.HasAnimations)
+                drawRect = this.CelAnimationManager.GetCurrentDrawRect(elapsedTime, currentAnimation.AnimationName, scale);
+            else
+                drawRect = defaultTexture.Bounds;
             return drawRect;
         }
 
@@ -260,7 +283,10 @@ namespace MonoGameLibrary.Sprite2
             return this.celAnimationManger.Animations[currentAnimation.AnimationName].LoopCount;
         }
 
-
+        internal void Initialize()
+        {
+            //throw new NotImplementedException();
+        }
     }
 
     public class SpriteAnimation 

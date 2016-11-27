@@ -12,7 +12,7 @@ namespace ShotManager
     class MouseShot : ShotManager
     {
         InputHandler input;
-        Shot s;
+        
 
         public MouseShot(Game game) : base(game)
         {

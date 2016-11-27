@@ -22,8 +22,6 @@ namespace MonoGameLibrary.Sprite2
         public DrawableSprite2(Game game)
             : base(game)
         {
-            // TODO: Construct any child components here
-            //content = game.Content;
             
         }
 
@@ -33,8 +31,6 @@ namespace MonoGameLibrary.Sprite2
         /// </summary>
         public override void Initialize()
         {
-            // TODO: Add your initialization code here
-            //graphics = (GraphicsDeviceManager)Game.Services.GetService(typeof(IGraphicsDeviceManager));
             base.Initialize();
         }
 
@@ -59,7 +55,7 @@ namespace MonoGameLibrary.Sprite2
             spriteBatch.Begin();
             this.Draw(spriteBatch);
             spriteBatch.End();
-            //base.Draw(gameTime);
+            base.Draw(gameTime);
         }
     }
 }
