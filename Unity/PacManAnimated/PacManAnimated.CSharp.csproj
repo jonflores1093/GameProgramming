@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F5840083-BE1A-B5E6-6723-CB9AF1D34A2C}</ProjectGuid>
+    <ProjectGuid>{220E5DBE-F198-B93A-AD27-1C5058473950}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -63,16 +63,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Observer\IObserver.cs" />
-    <Compile Include="Assets\Scripts\Observer\ISubject.cs" />
-    <Compile Include="Assets\Scripts\PacMan\Food.cs" />
-    <Compile Include="Assets\Scripts\PacMan\Ghost.cs" />
-    <Compile Include="Assets\Scripts\PacMan\GhostController.cs" />
-    <Compile Include="Assets\Scripts\PacMan\GhostSprite.cs" />
+    <Compile Include="Assets\Animations\PacManAnimationDie.cs" />
+    <Compile Include="Assets\Scripts\GhostTag.cs" />
     <Compile Include="Assets\Scripts\PacMan\PacMan.cs" />
     <Compile Include="Assets\Scripts\PacMan\Player.cs" />
     <Compile Include="Assets\Scripts\PacMan\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\PacMan\SuperFood.cs" />
     <Compile Include="Assets\Scripts\PacMan\UnityPacMan.cs" />
     <Compile Include="Assets\Scripts\Util.cs" />
   </ItemGroup>
