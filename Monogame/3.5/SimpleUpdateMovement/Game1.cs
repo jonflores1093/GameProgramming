@@ -42,7 +42,7 @@ namespace SimpleUpdateMovement
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            
 
             base.Initialize();
         }
@@ -56,10 +56,10 @@ namespace SimpleUpdateMovement
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            PacMan = Content.Load<Texture2D>("pacmanSingle");
+            PacMan = Content.Load<Texture2D>("pacManSingle");
             //Set PacMan Location to center of screen
-            PacManLoc = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
-                graphics.GraphicsDevice.Viewport.Height / 2);
+            PacManLoc = new Vector2(GraphicsDevice.Viewport.Width / 2,
+                GraphicsDevice.Viewport.Height / 2);
             //Vector for pacman direction
             //notice this vector has no magnitude it's noramlized
             PacManDir = new Vector2(1, 0);
@@ -112,12 +112,12 @@ namespace SimpleUpdateMovement
         private void UpatePacmanKeepOnScreen()
         {
             //Turn PacMan Around if it hits the edge of the screen
-            if ((PacManLoc.X > graphics.GraphicsDevice.Viewport.Width - PacMan.Width)
+            if ((PacManLoc.X > GraphicsDevice.Viewport.Width - PacMan.Width)
                 || (PacManLoc.X < 0))
             {
                 PacManDir *= new Vector2(-1, 0);
             }
-            if ((PacManLoc.Y > graphics.GraphicsDevice.Viewport.Height - PacMan.Height)
+            if ((PacManLoc.Y > GraphicsDevice.Viewport.Height - PacMan.Height)
                 || (PacManLoc.Y < 0))
             {
                 PacManDir *= new Vector2(0, -1);

@@ -28,7 +28,7 @@ namespace PacManSpriteComponent
         public DrawableSprite(Game game)
             : base(game)
         {
-            // TODO: Construct any child components here
+            
             content = game.Content;
             
         }
@@ -39,7 +39,7 @@ namespace PacManSpriteComponent
         /// </summary>
         public override void Initialize()
         {
-            // TODO: Add your initialization code here
+            
             graphics = (GraphicsDeviceManager)Game.Services.GetService(typeof(IGraphicsDeviceManager));
             base.Initialize();
         }
@@ -49,7 +49,7 @@ namespace PacManSpriteComponent
 
             spriteBatch = new SpriteBatch(graphics.GraphicsDevice);
            
-            Location = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
+            Location = new Vector2(this.Game.GraphicsDevice.Viewport.Width / 2, this.Game.GraphicsDevice.Viewport.Height / 2);
             Direction = new Vector2(1, 0);
             Speed = 100.0f;
             Rotate = 0.0f;
@@ -62,7 +62,7 @@ namespace PacManSpriteComponent
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            // TODO: Add your update code here
+            
             //Elapsed time since last update
             lastUpdateTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             //GamePad1

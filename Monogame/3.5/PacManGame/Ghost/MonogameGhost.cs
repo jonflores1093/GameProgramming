@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary.Sprite;
-using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
 using PacMan;
 using System;
@@ -56,8 +55,8 @@ namespace Ghost
         protected override void LoadContent()
         {
 
-            this.ghostTexture = this.content.Load<Texture2D>(strGhostTexture);
-            this.ghostHit = content.Load<Texture2D>("GhostHit");
+            this.ghostTexture = this.Game.Content.Load<Texture2D>(strGhostTexture);
+            this.ghostHit = this.Game.Content.Load<Texture2D>("GhostHit");
             this.spriteTexture = ghostTexture;
             this.Direction = new Vector2(0, 1);
 
@@ -149,9 +148,9 @@ namespace Ghost
                     //check if ghost can see pacman
                     Vector2 normD = Vector2.Normalize(this.Direction);
                     Vector2 p = new Vector2(this.Location.X, this.Location.Y);
-                    while (p.X < graphics.GraphicsDevice.Viewport.Width &&
+                    while (p.X < this.Game.GraphicsDevice.Viewport.Width &&
                           p.X > 0 &&
-                          p.Y < graphics.GraphicsDevice.Viewport.Height &&
+                          p.Y < this.Game.GraphicsDevice.Viewport.Height &&
                           p.Y > 0)
                     {
                         if (pacMan.LocationRect.Contains(new Point((int)p.X, (int)p.Y)))
@@ -169,7 +168,7 @@ namespace Ghost
             Location += ((this.Direction * (lastUpdateTime / 1000)) * Speed);      //Simple Move
 
             //Borders Keep Ghost on the Screen
-            if ((this.Location.Y + this.spriteTexture.Height / 2 > graphics.GraphicsDevice.Viewport.Height)
+            if ((this.Location.Y + this.spriteTexture.Height / 2 > this.Game.GraphicsDevice.Viewport.Height)
                 ||
                 (this.Location.Y - this.spriteTexture.Height / 2 < 0)
                 )
@@ -177,7 +176,7 @@ namespace Ghost
                 this.Direction.Y *= -1;
                 this.ghost.State = GhostState.Roving;
             }
-            if ((this.Location.X + this.spriteTexture.Width / 2 > graphics.GraphicsDevice.Viewport.Width)
+            if ((this.Location.X + this.spriteTexture.Width / 2 > this.Game.GraphicsDevice.Viewport.Width)
                 ||
                 (this.Location.X - this.spriteTexture.Width / 2 < 0)
                 )

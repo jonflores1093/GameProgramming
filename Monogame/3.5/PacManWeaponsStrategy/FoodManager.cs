@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-//using Microsoft.Xna.Framework.GamerServices;
+
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
@@ -29,7 +29,7 @@ namespace PacManWeaponsStrategy
         public FoodManager(Game game, MonoGamePacMan p)
             : base(game)
         {
-            // TODO: Construct any child components here
+            
             g = game;
             PacMan = p;
         }
@@ -40,7 +40,7 @@ namespace PacManWeaponsStrategy
         /// </summary>
         public override void Initialize()
         {
-            // TODO: Add your initialization code here
+            
             foods = new List<food>();
             Vector2 startLoc = new Vector2(10,10);
 
@@ -75,7 +75,7 @@ namespace PacManWeaponsStrategy
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            // TODO: Add your update code here
+            
             
             foreach  (var f in foods)
             {

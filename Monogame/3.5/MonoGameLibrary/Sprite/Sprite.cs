@@ -5,9 +5,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-//using Microsoft.Xna.Framework.GamerServices;
-
-
 
 namespace MonoGameLibrary.Sprite
 {
@@ -17,12 +14,14 @@ namespace MonoGameLibrary.Sprite
     /// </summary>
     public class Sprite : Microsoft.Xna.Framework.DrawableGameComponent
     {
-        public Vector2 Location, Direction, Origin;  //Origin starts at top left
-        public float Speed, Rotate;
+        //Vectors for Location Direction and Orgin
+        public Vector2 Location, Direction, Origin;  //Origin starts at top left can be moved to center by uncommenting code in LoadContent
+        public float Speed; 
+        public float Rotate;    //Rotation in degrees
         public SpriteEffects SpriteEffects;
         public Rectangle LocationRect { get { return locationRect; } set { locationRect = value; } }    //current location used for collision
                                                                              
-        public Color[] SpriteTextureData;
+        public Color[] SpriteTextureData;   //Arrat for Color Data used for collision
         public Texture2D spriteTexture;  //current Texture
         public Texture2D SpriteTexture
         {
@@ -30,7 +29,7 @@ namespace MonoGameLibrary.Sprite
             set
             {
                 spriteTexture = value;
-                // Extract collision data
+                // Extract collision data from texture to color array for collision
                 this.SpriteTextureData =
                     new Color[this.spriteTexture.Width * this.spriteTexture.Height];
                 this.spriteTexture.GetData(this.SpriteTextureData);
@@ -38,8 +37,8 @@ namespace MonoGameLibrary.Sprite
         }
         
         public Matrix spriteTransform;
-        protected ContentManager content;
-        protected GraphicsDeviceManager graphics;
+        //protected ContentManager content;
+        //protected GraphicsDeviceManager graphics;
         protected float lastUpdateTime;   
         protected Rectangle locationRect; //current location
         private Rectangle rectangle; //used as drawing target
@@ -71,11 +70,8 @@ namespace MonoGameLibrary.Sprite
         public Sprite(Game game)
             : base(game)
         {
-            // TODO: Construct any child components here
-            content = game.Content;
-            this.Scale = 1;
+            this.Scale = 1;                 //default scale is 1
             rectangle = new Rectangle();
-            
         }
 
         /// <summary>
@@ -84,8 +80,6 @@ namespace MonoGameLibrary.Sprite
         /// </summary>
         public override void Initialize()
         {
-            // TODO: Add your initialization code here
-            graphics = (GraphicsDeviceManager)Game.Services.GetService(typeof(IGraphicsDeviceManager));
             base.Initialize();
             SpriteEffects = SpriteEffects.None;  
         }
@@ -93,7 +87,7 @@ namespace MonoGameLibrary.Sprite
         protected override void LoadContent()
         {
             //Load texture for sprite Markers
-           this.SpriteMarkersTexture = content.Load<Texture2D>("SpriteMarker");
+           this.SpriteMarkersTexture = this.Game.Content.Load<Texture2D>("SpriteMarker");
             
             //top left orgin
             this.Origin = Vector2.Zero;
@@ -109,7 +103,6 @@ namespace MonoGameLibrary.Sprite
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            // TODO: Add your update code here
             //Elapsed time since last update
             lastUpdateTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             //SpriteEffects = SpriteEffects.None;       //Default Sprite Effects
@@ -213,7 +206,7 @@ namespace MonoGameLibrary.Sprite
         /// viewport.</returns>
         protected Vector2 clampToViewport(Vector2 vector)
         {
-            vp = graphics.GraphicsDevice.Viewport;
+            vp = this.Game.GraphicsDevice.Viewport;
             vector.X = MathHelper.Clamp(vector.X, vp.X, vp.X + vp.Width);
             vector.Y = MathHelper.Clamp(vector.Y, vp.Y, vp.Y + vp.Height);
             return vector;
@@ -221,7 +214,7 @@ namespace MonoGameLibrary.Sprite
 
         public virtual bool IsOffScreen()
         {
-            vp = graphics.GraphicsDevice.Viewport;
+            vp = this.Game.GraphicsDevice.Viewport;
             if((this.Location.X + this.SpriteTexture.Width ) <= (0 - this.Origin.X) || 
                 this.Location.X >= (vp.Width - this.Origin.X) ||
                 (this.Location.Y + this.SpriteTexture.Height) <= (0 - this.Origin.Y) ||

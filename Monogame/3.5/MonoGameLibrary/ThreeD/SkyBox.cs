@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-//using Microsoft.Xna.Framework.GamerServices;
+
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
@@ -81,12 +81,12 @@ namespace MonoGameLibrary.ThreeD
         {
             //base.Initialize();
 
-            //textures[0] = content.Load<Texture2D>("Skybox\\back");
-            //textures[1] = content.Load<Texture2D>("Skybox\\front");
-            //textures[2] = content.Load<Texture2D>("Skybox\\bottom");
-            //textures[3] = content.Load<Texture2D>("Skybox\\top");
-            //textures[4] = content.Load<Texture2D>("Skybox\\left");
-            //textures[5] = content.Load<Texture2D>("Skybox\\right");
+            //textures[0] = this.Game.Content.Load<Texture2D>("Skybox\\back");
+            //textures[1] = this.Game.Content.Load<Texture2D>("Skybox\\front");
+            //textures[2] = this.Game.Content.Load<Texture2D>("Skybox\\bottom");
+            //textures[3] = this.Game.Content.Load<Texture2D>("Skybox\\top");
+            //textures[4] = this.Game.Content.Load<Texture2D>("Skybox\\left");
+            //textures[5] = this.Game.Content.Load<Texture2D>("Skybox\\right");
 
             //effect = content.Load<Effect>("Skybox\\skybox");
 

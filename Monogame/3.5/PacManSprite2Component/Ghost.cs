@@ -13,13 +13,13 @@ namespace PacManSpriteComponent
         public Ghost(Game game)
             : base(game)
         {
-            // TODO: Construct any child components here
+            
         }
 
         protected override void LoadContent()
         {
             
-            spriteTexture = content.Load<Texture2D>("RedGhost");
+            spriteTexture = this.Game.Content.Load<Texture2D>("RedGhost");
             base.LoadContent();
         }
 

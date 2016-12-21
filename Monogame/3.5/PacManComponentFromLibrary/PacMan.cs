@@ -47,7 +47,7 @@ namespace PacManComponentFromLibrary
 
         protected override void LoadContent()
         {
-            this.spriteTexture = content.Load<Texture2D>("pacManSingle");
+            this.spriteTexture = this.Game.Content.Load<Texture2D>("pacManSingle");
             
             this.Location = new Vector2(300, 300);
             this.Speed = 100;
@@ -79,8 +79,8 @@ namespace PacManComponentFromLibrary
                 Location += ((Direction * (lastUpdateTime / 1000)) * Speed);      //Simple Move PacMan by PacManDir
 
                 //Keep PacMan On Screen
-                if (Location.X > graphics.GraphicsDevice.Viewport.Width - (spriteTexture.Width / 2))
-                    Location.X = graphics.GraphicsDevice.Viewport.Width - (spriteTexture.Width / 2);
+                if (Location.X > this.Game.GraphicsDevice.Viewport.Width - (spriteTexture.Width / 2))
+                    Location.X = this.Game.GraphicsDevice.Viewport.Width - (spriteTexture.Width / 2);
 
                 if (Location.X < (spriteTexture.Width / 2))
                     Location.X = (spriteTexture.Width / 2);

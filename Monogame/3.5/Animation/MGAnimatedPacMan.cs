@@ -62,7 +62,7 @@ namespace Animation
             PacManDying = new SpriteAnimation("PacManDying", "PacManDie", 5, 13, 1);
             spriteAnimationAdapter.AddAnimation(PacManDying);
 
-            Location = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
+            Location = new Vector2(this.Game.GraphicsDevice.Viewport.Width / 2, this.Game.GraphicsDevice.Viewport.Height / 2);
             Direction = new Vector2(1, 0);
             Speed = 100.0f;
             Rotate = 0.0f;

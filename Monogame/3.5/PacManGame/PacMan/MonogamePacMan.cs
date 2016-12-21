@@ -41,7 +41,7 @@ namespace Pac
         protected override void LoadContent()
         {
             base.LoadContent();
-            this.SpriteTexture = content.Load<Texture2D>("PacManSingle");
+            this.SpriteTexture = this.Game.Content.Load<Texture2D>("pacManSingle");
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
             this.Location = new Microsoft.Xna.Framework.Vector2(100, 100);
             this.Speed = 200;

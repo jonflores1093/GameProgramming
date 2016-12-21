@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 namespace MonoGameLibrary.Util
 {
     /// <summary>
-    /// Interface for InputHandle game service. This INterface allows the InputHandler class ro function as
+    /// Interface for InputHandle game service. This INterface allows the InputHandler class to function as
     /// a Game Service
     /// </summary>
     public interface IInputHandler
@@ -38,13 +38,24 @@ namespace MonoGameLibrary.Util
         //Local enum wraps xna buttons
         public enum ButtonType { A, B, Back, LeftShoulder, LeftStick, RightShoulder, RightStick, Start, X, Y }
 
+        //Wrapper for keyboard
         private KeyboardHandler keyboard;
+        //Wrapper for GamePads Monogame similar to XNA default to 4 gamepads
         private GamePadHandler gamePadHandler = new GamePadHandler();
         private GamePadState[] gamePads = new GamePadState[4];          //Array of gamecontrollers
 
 #if !XBOX360
-        private MouseState mouseState;
-        private MouseState prevMouseState;
+        //Two mice states used to compare where the mouse was on previous update to it current position
+        private MouseState mouseState;      //current mouse state
+        private MouseState prevMouseState;  //previous mouse state
+        public Vector2 MouseDelta
+        {
+            get
+            {
+                return new Vector2(mouseState.Position.X - prevMouseState.Position.X, 
+                    mouseState.Position.Y- prevMouseState.Position.Y);
+            }
+        }
 #endif
 
         private bool allowsExiting;     //use the back button or escape to exit 
@@ -72,7 +83,7 @@ namespace MonoGameLibrary.Util
 
         public override void Initialize()
         {
-            // TODO: Add your initialization code here
+            
             base.Initialize();
         }
 
@@ -82,7 +93,6 @@ namespace MonoGameLibrary.Util
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-
             keyboard.Update();
             gamePadHandler.Update();
 

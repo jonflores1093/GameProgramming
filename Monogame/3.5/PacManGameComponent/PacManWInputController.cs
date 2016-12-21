@@ -20,7 +20,7 @@ namespace PacManGameComponent
         public PacManWInputController(Game game)
             : base(game)
         {
-            // TODO: Construct any child components here
+            
             controller = new PlayerController(game);
             game.Components.Add(controller);
 
@@ -34,7 +34,7 @@ namespace PacManGameComponent
         /// </summary>
         public override void Initialize()
         {
-            // TODO: Add your initialization code here
+            
 
             base.Initialize();
         }
@@ -45,7 +45,7 @@ namespace PacManGameComponent
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            // TODO: Add your update code here
+            
             //Elapsed time since last update
             float time = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             
@@ -61,8 +61,8 @@ namespace PacManGameComponent
             this.UpdateMovePacMan();
             
             //Keep PacMan On Screen
-            if (Location.X > graphics.GraphicsDevice.Viewport.Width - (spriteTexture.Width / 2))
-                Location.X = graphics.GraphicsDevice.Viewport.Width - (spriteTexture.Width / 2);
+            if (Location.X > this.Game.GraphicsDevice.Viewport.Width - (spriteTexture.Width / 2))
+                Location.X = this.Game.GraphicsDevice.Viewport.Width - (spriteTexture.Width / 2);
 
             if (Location.X < (spriteTexture.Width / 2))
                 Location.X = (spriteTexture.Width / 2);

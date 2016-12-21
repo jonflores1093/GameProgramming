@@ -16,7 +16,7 @@ namespace MonoGameLibrary.ThreeD
         public FirstPersonCamera(Game game)
             : base(game)
         {
-            // TODO: Construct any child components here
+            
         }
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace MonoGameLibrary.ThreeD
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            // TODO: Add your update code here
+            
             //reset movement vector
             movement = Vector3.Zero;
 

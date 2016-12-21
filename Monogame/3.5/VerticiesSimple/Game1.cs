@@ -72,7 +72,7 @@ namespace VerticiesSimple
 
             projectionMatrix = Matrix.CreatePerspectiveFieldOfView(
                 MathHelper.ToRadians(45),  // 45 degree angle
-                (float)graphics.GraphicsDevice.Viewport.Width / (float)graphics.GraphicsDevice.Viewport.Height,
+                (float)GraphicsDevice.Viewport.Width / (float)GraphicsDevice.Viewport.Height,
                 1.0f, 100.0f);
 
             gameConsole.GameConsoleWrite("Translate");
@@ -106,7 +106,7 @@ namespace VerticiesSimple
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            
         }
 
         /// <summary>

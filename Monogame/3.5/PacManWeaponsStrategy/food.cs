@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-//using Microsoft.Xna.Framework.GamerServices;
+
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
@@ -21,7 +21,7 @@ namespace PacManWeaponsStrategy
         public food(Game game)
             : base(game)
         {
-            // TODO: Construct any child components here
+            
             this.color = Color.White;
         }
 
@@ -31,14 +31,14 @@ namespace PacManWeaponsStrategy
         /// </summary>
         public override void Initialize()
         {
-            // TODO: Add your initialization code here
+            
 
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            spriteTexture = content.Load<Texture2D>("food");
+            spriteTexture = this.Game.Content.Load<Texture2D>("food");
             Speed = 0;
             base.LoadContent();
         }
@@ -49,7 +49,7 @@ namespace PacManWeaponsStrategy
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            // TODO: Add your update code here
+            
 
             base.Update(gameTime);
         }

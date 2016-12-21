@@ -19,13 +19,13 @@ namespace GameComponents
         protected Texture2D spriteTexture;
         
         protected GraphicsDeviceManager graphics;
-        protected SpriteBatch spriteBatch;
+        //protected SpriteBatch spriteBatch;
         protected float lastUpdateTime;
 
         public PacManSimpleComponent(Game game)
             : base(game)
         {
-            // TODO: Construct any child components here
+            this.Speed = 200;
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace GameComponents
         /// </summary>
         public override void Initialize()
         {
-            // TODO: Add your initialization code here
+            
             graphics = (GraphicsDeviceManager)Game.Services.GetService(typeof(IGraphicsDeviceManager));
             base.Initialize();
         }
@@ -42,7 +42,7 @@ namespace GameComponents
         protected override void LoadContent()
         {
             base.LoadContent();
-            spriteTexture = this.Game.Content.Load<Texture2D>("pacmanSingle");
+            spriteTexture = this.Game.Content.Load<Texture2D>("pacManSingle");
         }
 
         public override void Update(GameTime gameTime)
@@ -76,8 +76,8 @@ namespace GameComponents
                 Location += ((Direction * (lastUpdateTime / 1000)) * Speed);      //Simple Move PacMan by PacManDir
 
                 //Keep PacMan On Screen
-                if (Location.X > graphics.GraphicsDevice.Viewport.Width - (spriteTexture.Width / 2))
-                    Location.X = graphics.GraphicsDevice.Viewport.Width - (spriteTexture.Width / 2);
+                if (Location.X > this.Game.GraphicsDevice.Viewport.Width - (spriteTexture.Width / 2))
+                    Location.X = this.Game.GraphicsDevice.Viewport.Width - (spriteTexture.Width / 2);
 
                 if (Location.X < (spriteTexture.Width / 2))
                     Location.X = (spriteTexture.Width / 2);

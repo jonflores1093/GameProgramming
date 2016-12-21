@@ -83,8 +83,8 @@ public partial class Camera : Microsoft.Xna.Framework.GameComponent, ICamera
 
         private void InitializeCamera()
         {
-            float aspectRatio = (float)graphics.GraphicsDevice.Viewport.Width /
-                (float)graphics.GraphicsDevice.Viewport.Height;
+            float aspectRatio = (float)this.Game.GraphicsDevice.Viewport.Width /
+                (float)this.Game.GraphicsDevice.Viewport.Height;
             Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, aspectRatio,
                 1.0f, 10000.0f, out projection);
 

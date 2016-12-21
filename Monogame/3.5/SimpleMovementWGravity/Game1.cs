@@ -46,7 +46,7 @@ namespace SimpleMovementWGravity
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            
 
             base.Initialize();
         }
@@ -60,10 +60,10 @@ namespace SimpleMovementWGravity
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            PacMan = Content.Load<Texture2D>("pacmanSingle");
+            PacMan = Content.Load<Texture2D>("pacManSingle");
             //Set PacMan Location to center of screen
-            PacManLoc = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2,
-                graphics.GraphicsDevice.Viewport.Height / 2);
+            PacManLoc = new Vector2(GraphicsDevice.Viewport.Width / 2,
+                GraphicsDevice.Viewport.Height / 2);
             //Vector for pacman direction
             //notice this vector has no magnitude it's noramlized
             PacManDir = new Vector2(1, 0);
@@ -134,11 +134,11 @@ namespace SimpleMovementWGravity
             //Turns around and stays at edges
             //X right
             if (PacManLoc.X >
-                    graphics.GraphicsDevice.Viewport.Width - PacMan.Width)
+                    GraphicsDevice.Viewport.Width - PacMan.Width)
             {
                 //Negate X
                 PacManDir = PacManDir * new Vector2(-1, 1);
-                PacManLoc.X = graphics.GraphicsDevice.Viewport.Width - PacMan.Width;
+                PacManLoc.X = GraphicsDevice.Viewport.Width - PacMan.Width;
             }
 
             //X left
@@ -151,11 +151,11 @@ namespace SimpleMovementWGravity
 
             //Y top
             if (PacManLoc.Y >
-                    graphics.GraphicsDevice.Viewport.Height - PacMan.Height)
+                    GraphicsDevice.Viewport.Height - PacMan.Height)
             {
                 //Negate Y
                 PacManDir = PacManDir * new Vector2(1, -1);
-                PacManLoc.Y = graphics.GraphicsDevice.Viewport.Height - PacMan.Height;
+                PacManLoc.Y = GraphicsDevice.Viewport.Height - PacMan.Height;
             }
 
             //Y bottom

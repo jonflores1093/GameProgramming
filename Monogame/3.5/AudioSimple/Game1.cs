@@ -35,7 +35,7 @@ namespace AudioSimple
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            
 
             base.Initialize();
         }
@@ -61,7 +61,7 @@ namespace AudioSimple
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            
         }
 
         /// <summary>

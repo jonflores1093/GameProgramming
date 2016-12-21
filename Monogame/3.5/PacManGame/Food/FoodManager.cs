@@ -41,7 +41,7 @@ namespace PacManGame.Food
         /// </summary>
         public override void Initialize()
         {
-            // TODO: Add your initialization code here
+            
             foods = new List<Food>();
             Vector2 startLoc = new Vector2(10, 10);
 
@@ -85,7 +85,7 @@ namespace PacManGame.Food
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            // TODO: Add your update code here
+            
 
             foreach (var f in foods)
             {

@@ -33,8 +33,8 @@ namespace SpritebatchOptions
         /// </summary>
         protected override void Initialize()
         {
-            PacMan = Content.Load<Texture2D>("pacmanSingle");
-            PacManLoc = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
+            PacMan = Content.Load<Texture2D>("pacManSingle");
+            PacManLoc = new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
             PacManLocMoveAddition = Vector2.Zero;
 
             base.Initialize();
@@ -49,7 +49,7 @@ namespace SpritebatchOptions
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace SpritebatchOptions
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            
         }
 
         /// <summary>

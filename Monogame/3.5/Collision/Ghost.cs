@@ -41,8 +41,8 @@ namespace Collision
 
         protected override void LoadContent()
         {
-            this.ghostTexture = content.Load<Texture2D>("TealGhost");
-            this.hitTexture = content.Load<Texture2D>("GhostHit");
+            this.ghostTexture = this.Game.Content.Load<Texture2D>("TealGhost");
+            this.hitTexture = this.Game.Content.Load<Texture2D>("GhostHit");
             this.spriteTexture = ghostTexture;
 
             this.Location = new Vector2(100 + (100 * ghostCount), 100 ); //offset based on ghostcount

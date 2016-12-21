@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-//using Microsoft.Xna.Framework.GamerServices;
+
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
@@ -16,13 +16,13 @@ namespace PacManSpriteComponent
         public PacMan(Game game)
             : base(game)
         {
-            // TODO: Construct any child components here
+            
         }
 
         protected override void LoadContent()
         {
             base.LoadContent();
-            spriteTexture = content.Load<Texture2D>("pacmanSingle");
+            spriteTexture = this.Game.Content.Load<Texture2D>("pacManSingle");
         }
 
         public override void Update(GameTime gameTime)
@@ -54,8 +54,8 @@ namespace PacManSpriteComponent
                 Location += ((Direction * (lastUpdateTime / 1000)) * Speed);      //Simple Move PacMan by PacManDir
 
                 //Keep PacMan On Screen
-                if (Location.X > graphics.GraphicsDevice.Viewport.Width - (spriteTexture.Width / 2))
-                    Location.X = graphics.GraphicsDevice.Viewport.Width - (spriteTexture.Width / 2);
+                if (Location.X > this.Game.GraphicsDevice.Viewport.Width - (spriteTexture.Width / 2))
+                    Location.X = this.Game.GraphicsDevice.Viewport.Width - (spriteTexture.Width / 2);
 
                 if (Location.X < (spriteTexture.Width / 2))
                     Location.X = (spriteTexture.Width / 2);

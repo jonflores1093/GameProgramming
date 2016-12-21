@@ -42,7 +42,7 @@ namespace PacManGame.Food
 
         protected override void LoadContent()
         {
-            spriteTexture = content.Load<Texture2D>("food");
+            spriteTexture = this.Game.Content.Load<Texture2D>("food");
             Speed = 0;
             base.LoadContent();
         }
@@ -53,7 +53,7 @@ namespace PacManGame.Food
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            // TODO: Add your update code here
+            
 
             base.Update(gameTime);
         }

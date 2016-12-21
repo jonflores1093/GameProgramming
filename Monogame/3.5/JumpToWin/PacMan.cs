@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-//using Microsoft.Xna.Framework.GamerServices;
+
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
@@ -42,7 +42,7 @@ namespace JumpToWin
         protected override void LoadContent()
         {
             base.LoadContent();
-            spriteTexture = content.Load<Texture2D>("pacmanSingle");
+            spriteTexture = this.Game.Content.Load<Texture2D>("pacManSingle");
             
             GravityDir = new Vector2(0, 1);
             GravityAccel = 6.0f;

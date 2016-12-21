@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-//using Microsoft.Xna.Framework.GamerServices;
+
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
@@ -91,7 +91,7 @@ namespace MonoGameLibrary.ThreeD
         public Mesh(Game game, string modelName)
             : base(game)
         {
-            // TODO: Construct any child components here
+            
             graphics = (GraphicsDeviceManager)Game.Services.GetService(typeof(IGraphicsDeviceManager));
             camera = (Camera)Game.Services.GetService(typeof(ICamera));
             this.modelName = modelName;
@@ -106,7 +106,7 @@ namespace MonoGameLibrary.ThreeD
         /// </summary>
         public override void Initialize()
         {
-            // TODO: Add your initialization code here
+            
 
             base.Initialize();
         }
@@ -117,7 +117,7 @@ namespace MonoGameLibrary.ThreeD
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            // TODO: Add your update code here
+            
             //Elapsed time since last update
             float time = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             
@@ -144,8 +144,8 @@ namespace MonoGameLibrary.ThreeD
         private void DrawModel(Camera camera)
         {
             Matrix[] transforms = new Matrix[model.Bones.Count];
-            float aspectRatio = graphics.GraphicsDevice.Viewport.Width /
-                                    graphics.GraphicsDevice.Viewport.Height;
+            float aspectRatio = this.Game.GraphicsDevice.Viewport.Width /
+                                    this.Game.GraphicsDevice.Viewport.Height;
             model.CopyAbsoluteBoneTransformsTo(transforms);
 
             Matrix projection = camera.Projection;
@@ -205,8 +205,8 @@ namespace MonoGameLibrary.ThreeD
         {
             Matrix[] transforms = new Matrix[model.Bones.Count];
             //float aspectRatio = 640.0f / 480.0f;
-            float aspectRatio = graphics.GraphicsDevice.Viewport.Width /
-                                    graphics.GraphicsDevice.Viewport.Height;
+            float aspectRatio = this.Game.GraphicsDevice.Viewport.Width /
+                                    this.Game.GraphicsDevice.Viewport.Height;
             model.CopyAbsoluteBoneTransformsTo(transforms);
             Matrix projection = Matrix.CreatePerspectiveFieldOfView(
                                MathHelper.ToRadians(45.0f), aspectRatio, 1.0f, 100.0f);

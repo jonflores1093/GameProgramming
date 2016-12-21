@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-//using Microsoft.Xna.Framework.GamerServices;
+
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
@@ -65,7 +65,7 @@ namespace MonoGameLibrary.Util
         public GameConsole(Game game)
             : base(game)
         {
-            // TODO: Construct any child components here
+            
             this.fontName = "Arial";        //default font
             this.gameConsoleText = new List<string>();
             this.maxLines = 20;             //deafult nuber of lines
@@ -81,8 +81,7 @@ namespace MonoGameLibrary.Util
 
            
             input = (InputHandler)game.Services.GetService(typeof(IInputHandler));
-
-            //Make sure input service exsists
+            //Make sure input service exsists if not lazily add one
             if (input == null)
             {
                 //try to add one
@@ -95,7 +94,6 @@ namespace MonoGameLibrary.Util
                     throw new Exception("GameConsole Depends on Input service please add input service before you add GameConsole.");
                 }
             }
-            
             game.Services.AddService(typeof(IGameConsole), this);
         }
 
@@ -128,7 +126,7 @@ namespace MonoGameLibrary.Util
         /// </summary>
         public override void Initialize()
         {
-            // TODO: Add your initialization code here
+            
             
             base.Initialize();
         }
@@ -146,7 +144,7 @@ namespace MonoGameLibrary.Util
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            // TODO: Add your update code here
+            
             
             if(input.KeyboardState.HasReleasedKey(ToggleConsoleKey))
             {
@@ -156,6 +154,9 @@ namespace MonoGameLibrary.Util
             base.Update(gameTime);
         }
 
+        /// <summary>
+        /// Opens or closes the Console Display
+        /// </summary>
         public void ToggleConsole()
         {
             if (this.gameConsoleState == GameConsoleState.Closed)
@@ -172,19 +173,14 @@ namespace MonoGameLibrary.Util
         {
             if (this.gameConsoleState == GameConsoleState.Open)
             {
-                //spriteBatch.Begin();
-                //4.0 change
-                //spriteBatch.Begin(SpriteBlendMode.AlphaBlend, SpriteS2rtMode.Deferred, SaveStateMode.SaveState);
                 spriteBatch.Begin();
                 spriteBatch.DrawString(font, GetGameConsoleText(), Vector2.Zero, Color.Wheat);
                 
-                
-                
+                //Collect data added fron the dictionary
                 debugTextOutString = String.Empty;
                 foreach (var item in debugTextOutput)
                 {
                     debugTextOutString += "\n" +  item.Key + " : " + item.Value;
-                    
                 }
                 
                 spriteBatch.DrawString(font, debugText + debugTextOutString, new Vector2(debugTextStartX, debugTextStartY), Color.Wheat);
@@ -206,14 +202,6 @@ namespace MonoGameLibrary.Util
             int indexStart = offsetLines - (maxLines - offest);
             if (indexStart < 0)
                 indexStart = 0;
-            /*
-            this.debugText = string.Format(
-                "offesetLines:{0}\noffset:{1}\ngameConsoleText.Count:{2}\nIndexStart:{3}",
-                offsetLines.ToString(),
-                offest.ToString(),
-                gameConsoleText.Count.ToString(),
-                indexStart);
-            */
             
             gameConsoleText.CopyTo(
                 indexStart, current, 0 , Math.Min(gameConsoleText.Count, MaxLines));
@@ -226,6 +214,13 @@ namespace MonoGameLibrary.Util
             return Text;
         }
 
+        /// <summary>
+        /// Add a new Key to the Dictionary the is displayed in the Debug Text
+        /// Data is displayed on line per entry in the format
+        /// DebugKey: DebugValue
+        /// </summary>
+        /// <param name="DebugKey">The key for the debug data must be unique</param>
+        /// <param name="DebugValue">The vlaue to display must be a string</param>
         public void Log(string DebugKey, string DebugValue)
         {
             if(this.debugTextOutput.ContainsKey(DebugKey))
@@ -236,6 +231,10 @@ namespace MonoGameLibrary.Util
             debugTextOutput.Add(DebugKey, DebugValue); 
         }
 
+        /// <summary>
+        /// Adds a line to the Debug Console
+        /// </summary>
+        /// <param name="s">String to add to the console</param>
         public void GameConsoleWrite(string s)
         {
             gameConsoleText.Add(s);

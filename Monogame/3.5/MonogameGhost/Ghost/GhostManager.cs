@@ -32,7 +32,7 @@ namespace MonogameGhost.Ghost
 
         public override void Update(GameTime gameTime)
         {
-            // TODO: Add your update code here
+            
             if (input.WasKeyPressed(Keys.C))
             {
                 this.ChangeState(GhostState.Chasing);

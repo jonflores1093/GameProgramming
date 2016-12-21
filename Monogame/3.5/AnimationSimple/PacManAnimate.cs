@@ -23,7 +23,7 @@ namespace AnimationSimple
         public PacManAnimate(Game game)
             : base(game)
         {
-            // TODO: Construct any child components here
+            
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace AnimationSimple
         /// </summary>
         public override void Initialize()
         {
-            // TODO: Add your initialization code here
+            
 
             base.Initialize();
         }
@@ -40,7 +40,7 @@ namespace AnimationSimple
         protected override void LoadContent()
         {
             base.LoadContent();
-            this.spriteTexture = Game.Content.Load<Texture2D>("pacmanDie");
+            this.spriteTexture = this.Game.Content.Load<Texture2D>("pacmanDie");
             this.framesizeX = 54;
             this.framesizeY = 54;
             this.currentFrame = 0;
@@ -55,7 +55,7 @@ namespace AnimationSimple
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            // TODO: Add your update code here
+            
             AnimateTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
             //move to next frame
             if (AnimateTime > this.timePerFrame)

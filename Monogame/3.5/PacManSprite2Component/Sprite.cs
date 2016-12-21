@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-//using Microsoft.Xna.Framework.GamerServices;
+
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
@@ -28,7 +28,7 @@ namespace PacManSpriteComponent
         public Sprite(Game game)
             : base(game)
         {
-            // TODO: Construct any child components here
+            
             content = game.Content;
             
         }
@@ -39,7 +39,7 @@ namespace PacManSpriteComponent
         /// </summary>
         public override void Initialize()
         {
-            // TODO: Add your initialization code here
+            
             graphics = (GraphicsDeviceManager)Game.Services.GetService(typeof(IGraphicsDeviceManager));
             base.Initialize();
         }
@@ -52,7 +52,7 @@ namespace PacManSpriteComponent
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            // TODO: Add your update code here
+            
             //Elapsed time since last update
             lastUpdateTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             //GamePad1

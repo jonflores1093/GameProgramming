@@ -45,7 +45,7 @@ namespace SimpleMovementJump
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            
 
             base.Initialize();
         }
@@ -59,8 +59,8 @@ namespace SimpleMovementJump
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            PacMan = Content.Load<Texture2D>("pacmanSingle");
-            PacManLoc = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
+            PacMan = Content.Load<Texture2D>("pacManSingle");
+            PacManLoc = new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
             PacManDir = new Vector2(50, 0);
             PacManSpeedMax = 200;
 
@@ -76,7 +76,7 @@ namespace SimpleMovementJump
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace SimpleMovementJump
             if (
                 //X right
                 (PacManLoc.X >
-                    graphics.GraphicsDevice.Viewport.Width - PacMan.Width)
+                    GraphicsDevice.Viewport.Width - PacMan.Width)
                 ||
                 //X left
                 (PacManLoc.X < 0)

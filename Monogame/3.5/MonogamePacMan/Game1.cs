@@ -48,7 +48,7 @@ namespace MonogamePacMan
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            
 
             base.Initialize();
         }
@@ -63,7 +63,7 @@ namespace MonogamePacMan
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //Preload content
-            Content.Load<Texture2D>("PacManSingle");
+            Content.Load<Texture2D>("pacManSingle");
 
         }
 
@@ -73,7 +73,7 @@ namespace MonogamePacMan
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            
         }
 
         /// <summary>

@@ -15,7 +15,6 @@ namespace MonoGameLibrary.Util
 
     public sealed class FPS : Microsoft.Xna.Framework.DrawableGameComponent
     {
-        
 
         private bool updateTimeFixed;
         private bool synchronizeWithVerticalRetrace;
@@ -26,7 +25,7 @@ namespace MonoGameLibrary.Util
 
         string fps;
 
-        GameConsole console;
+        GameConsole console;        //The FPS component depends on the console component
 
         public FPS(Game game, bool synchWithVerticalRetrace, bool isFixedTimeStep)
             : this(game, synchWithVerticalRetrace, isFixedTimeStep,
@@ -50,6 +49,11 @@ namespace MonoGameLibrary.Util
             graphics.ApplyChanges();
 
             console = (GameConsole)this.Game.Services.GetService<IGameConsole>();
+            if(console == null) //Lazily add console if missing
+            {
+                console = new GameConsole(this.Game);
+                this.Game.Components.Add(console);
+            }
         }
 
         public void ToggleTimeFixed()
@@ -98,7 +102,7 @@ namespace MonoGameLibrary.Util
         /// </summary>
         public sealed override void Initialize()
         {
-            // TODO: Add your initialization code here
+            
             base.Initialize();
         }
 
@@ -108,8 +112,9 @@ namespace MonoGameLibrary.Util
         /// <param name="gameTime">Provides snapshot of timing values.</param>
         public sealed override void Update(GameTime gameTime)
         {
+            //Only logs frames if in Debug Mode
 #if DEBUG
-            // TODO: Add your update code here
+            
             elapsedTime += gameTime.ElapsedGameTime;
 
             if (elapsedTime > TimeSpan.FromSeconds(1))
@@ -155,7 +160,5 @@ namespace MonoGameLibrary.Util
 #endif
             base.Draw(gameTime);
         }
-
-        
     }
 }

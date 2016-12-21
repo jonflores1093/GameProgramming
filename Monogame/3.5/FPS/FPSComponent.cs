@@ -89,7 +89,7 @@ namespace FPS
         /// </summary>
         public sealed override void Initialize()
         {
-            // TODO: Add your initialization code here
+            
             base.Initialize();
         }
 
@@ -100,7 +100,7 @@ namespace FPS
         public sealed override void Update(GameTime gameTime)
         {
 #if DEBUG
-            // TODO: Add your update code here
+            
             elapsedTime += gameTime.ElapsedGameTime;
 
             if (elapsedTime > TimeSpan.FromSeconds(1))

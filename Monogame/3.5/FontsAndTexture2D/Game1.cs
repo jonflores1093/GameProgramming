@@ -35,7 +35,7 @@ namespace FontsAndTexture2D
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            
 
             base.Initialize();
         }
@@ -57,7 +57,7 @@ namespace FontsAndTexture2D
             //Locate Texture for PacMan
             //Will get null object excpetion if pacmanSingle has not been added to the Content.mgcb file
             //see http://imamp.colum.edu/mediawiki/index.php/Hello_World_in_Monogame_using_spritefont
-            PacMan = Content.Load<Texture2D>("pacmanSingle");
+            PacMan = Content.Load<Texture2D>("pacManSingle");
             //set the location
             //PacManLoc = new Vector2(100, 100);
 
@@ -73,7 +73,7 @@ namespace FontsAndTexture2D
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            
         }
 
         /// <summary>

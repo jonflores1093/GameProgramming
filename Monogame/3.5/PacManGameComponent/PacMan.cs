@@ -70,7 +70,7 @@ namespace PacManGameComponent
 
         protected override void LoadContent()
         {
-            this.spriteTexture = content.Load<Texture2D>("pacManSingle");
+            this.spriteTexture = this.Game.Content.Load<Texture2D>("pacManSingle");
 
             this.Location = new Vector2(300, 300);
             this.Speed = 100;
