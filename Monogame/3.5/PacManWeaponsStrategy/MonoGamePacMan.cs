@@ -11,7 +11,7 @@ using StrategyPacMan.weapons;
 
 namespace PacManWeaponsStrategy
 {
-    public class MonoGamePacMan : MonoGameLibrary.Sprite2.DrawableSprite2
+    public class MonoGamePacMan : MonoGameLibrary.Sprite.DrawableSprite
     {
         internal PacManController controller { get; private set; }
 

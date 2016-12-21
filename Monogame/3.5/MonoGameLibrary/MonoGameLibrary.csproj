@@ -56,13 +56,10 @@
     <Compile Include="Particles\ParticleManager.cs" />
     <Compile Include="Particles\ParticleSystem.cs" />
     <Compile Include="Sound\SoundManager.cs" />
-    <Compile Include="Sprite2\DrawableAnimatableSprite2.cs" />
-    <Compile Include="Sprite2\DrawableSprite2.cs" />
-    <Compile Include="Sprite2\Sprite2.cs" />
-    <Compile Include="Sprite2\CelAnimationManager.cs" />
     <Compile Include="Sprite\DrawableAnimatableSprite.cs" />
     <Compile Include="Sprite\DrawableSprite.cs" />
     <Compile Include="Sprite\Sprite.cs" />
+    <Compile Include="Sprite\CelAnimationManager.cs" />
     <Compile Include="State\GameState.cs" />
     <Compile Include="State\GameStateManager.cs" />
     <Compile Include="ThreeD\Camera.cs" />

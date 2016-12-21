@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MonoGameLibrary.Sprite2;
+using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace PacManGameComponent
         Spawning, Stopped, Chomping, Dying, Dead, PoweredUp
     }
 
-    public class PacMan : DrawableSprite2
+    public class PacMan : DrawableSprite
     {
         //Services
         protected GameConsole console;

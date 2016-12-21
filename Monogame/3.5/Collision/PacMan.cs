@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 using MonoGameLibrary;
-using MonoGameLibrary.Sprite2;
+using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
 
 namespace Collision
@@ -19,7 +19,7 @@ namespace Collision
         Spawning, Stopped, Chomping, Dying, Dead, PoweredUp
     }
 
-    class PacMan : DrawableSprite2
+    class PacMan : DrawableSprite
     {
         int playerIndex; //player index for controller
 

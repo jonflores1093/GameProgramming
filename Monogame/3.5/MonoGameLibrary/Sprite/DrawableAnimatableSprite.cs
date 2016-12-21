@@ -18,16 +18,13 @@ namespace MonoGameLibrary.Sprite
     {
 
         protected SpriteAnimationAdapter spriteAnimationAdapter;
-
-        protected Texture2D currentTexture;
+        Rectangle currentTextureRect;
 
         public DrawableAnimatableSprite(Game game)
             : base(game)
         {
-            // TODO: Construct any child components here
-            //content = game.Content;
-            spriteAnimationAdapter = new SpriteAnimationAdapter(game);
             
+            spriteAnimationAdapter = new SpriteAnimationAdapter(game, this);
         }
 
         /// <summary>
@@ -36,61 +33,59 @@ namespace MonoGameLibrary.Sprite
         /// </summary>
         public override void Initialize()
         {
-            // TODO: Add your initialization code here
-            //graphics = (GraphicsDeviceManager)Game.Services.GetService(typeof(IGraphicsDeviceManager));
             base.Initialize();
+            spriteAnimationAdapter.Initialize();
+            
         }
 
         protected override void LoadContent()
         {
-
-            //Set Sprite Texture
-            this.spriteTexture = spriteAnimationAdapter.CurrentTexture;
-
+            spriteAnimationAdapter.LoadContent();
             base.LoadContent();
         }
 
         
-
         /// <summary>
         /// Allows the game component to update itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            // TODO: Add your update code here
             //Elapsed time since last update
             lastUpdateTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            //GamePad1
+            
             SpriteEffects = SpriteEffects.None;       //Default Sprite Effects
-            this.spriteTexture = this.spriteAnimationAdapter.CurrentTexture;   //update texture for collision
-
-            Rectangle currentTextureRect = spriteAnimationAdapter.GetCurrentDrawRect(lastUpdateTime);
-
-            this.locationRect = new Rectangle((int)Location.X - (int)this.Orgin.X,
-                (int)Location.Y - (int)this.Orgin.Y,
-                currentTextureRect.Width,
-                currentTextureRect.Height);
-
+            if(this.spriteAnimationAdapter.HasAnimations)
+                this.spriteTexture = this.spriteAnimationAdapter.CurrentTexture;        //update texture for collision
+               
             base.Update(gameTime);
+
+            currentTextureRect = spriteAnimationAdapter.GetCurrentDrawRect(lastUpdateTime, this.scale);
+            SetTranformAndRect();
+            //HACK
+            this.SpriteTextureData = new Color[this.spriteAnimationAdapter.CurrentTexture.Width * this.spriteAnimationAdapter.CurrentTexture.Height];
+            this.spriteAnimationAdapter.CurrentTexture.GetData(this.SpriteTextureData);
+            //this.locationRect = new Rectangle((int)Location.X - (int)this.Orgin.X,
+            //    (int)Location.Y - (int)this.Orgin.Y,
+            //    currentTextureRect.Width,
+            //    currentTextureRect.Height);
         }
 
-        //Override to use the correct rectagle
-        protected override void SetTranformAndRect()
+        public override void SetTranformAndRect()
         {
             try
             {
                 // Build the block's transform
                 spriteTransform =
-                    Matrix.CreateTranslation(new Vector3(this.Orgin, 0.0f)) *
+                    Matrix.CreateTranslation(new Vector3(this.Origin * -1, 0.0f)) *
                     Matrix.CreateScale(this.Scale) *
                     Matrix.CreateRotationZ(0.0f) *
                     Matrix.CreateTranslation(new Vector3(this.Location, 0.0f));
 
                 // Calculate the bounding rectangle of this block in world space
                 this.locationRect = CalculateBoundingRectangle(
-                         new Rectangle(0, 0, this.spriteAnimationAdapter.CurrentTexture.Width,
-                             this.spriteAnimationAdapter.CurrentTexture.Height),
+                         new Rectangle(0, 0, this.currentTextureRect.Width,
+                             this.currentTextureRect.Height),
                          spriteTransform);
             }
             catch (NullReferenceException nu)
@@ -99,7 +94,6 @@ namespace MonoGameLibrary.Sprite
                 if (this.spriteTexture == null)
                 {
                     //first time this will fail because load content hasn't been called yet
-
                 }
                 else
                 {
@@ -114,88 +108,62 @@ namespace MonoGameLibrary.Sprite
 
         public override void Draw(GameTime gameTime)
         {
-            Rectangle currentTextureRect = spriteAnimationAdapter.GetCurrentDrawRect(lastUpdateTime);
-
-            this.locationRect = new Rectangle((int)Location.X - (int)this.Orgin.X,
-                (int)Location.Y - (int)this.Orgin.Y,
-                currentTextureRect.Width,
-                currentTextureRect.Height);
-            
             spriteBatch.Begin();
+
             spriteBatch.Draw(spriteAnimationAdapter.CurrentTexture,
-                new Rectangle(
-                    (int)Location.X,
-                    (int)Location.Y,
-                    currentTextureRect.Width * (int)this.Scale,
-                    currentTextureRect.Height *(int)this.Scale),
+                new Rectangle((int)Location.X, (int)Location.Y,
+                (int)(currentTextureRect.Width * this.scale),
+                (int)(currentTextureRect.Height* this.scale)),
                 currentTextureRect,
                 Color.White,
                 MathHelper.ToRadians(Rotate),
-                this.Orgin,
+                this.Origin,
                 SpriteEffects,
                 0);
+            
 
-            this.DrawMarkers(spriteBatch);
+            base.DrawMarkers(spriteBatch);
+
             spriteBatch.End();
             //base.Draw(gameTime);
         }
 
-        protected override void DrawMarkers(SpriteBatch sb)
+        /// <summary>
+        /// Checks if this sprites pixels intersect with another sprite
+        /// This is more painful than checking rectangles
+        /// </summary>
+        /// <param name="OtherSprite"></param>
+        /// <returns></returns>
+        public override bool PerPixelCollision2(Sprite OtherSprite)
         {
-            //Show markers on the location and rect of a sprite
-            if (showMarkers)
-            {
-                Rectangle markerRect = new Rectangle((int)(this.locationRect.X  * scale),
-                    (int)(this.locationRect.Y   * scale),
-                    (int)(this.spriteAnimationAdapter.CurrentLocationRect.Width * this.Scale),
-                    (int)(this.spriteAnimationAdapter.CurrentLocationRect.Height * this.Scale));
-
-                //Rectangle markerRect = this.locationRect;
-
-                //Rect Top Left
-                sb.Draw(this.SpriteMarkersTexture,
-                    new Rectangle(markerRect.Left - this.SpriteMarkersTexture.Width / 2,
-                        markerRect.Top - this.SpriteMarkersTexture.Height / 2,
-                        SpriteMarkersTexture.Width, SpriteMarkersTexture.Height),
-                    Color.Red);
-                //Rect Top Right
-                sb.Draw(this.SpriteMarkersTexture,
-                   new Rectangle(markerRect.Right - this.SpriteMarkersTexture.Width / 2,
-                       markerRect.Top, SpriteMarkersTexture.Width, SpriteMarkersTexture.Height),
-                   Color.Red);
-                //Rect Bottom Left
-                sb.Draw(this.SpriteMarkersTexture,
-                   new Rectangle(markerRect.Left - this.SpriteMarkersTexture.Width / 2,
-                       markerRect.Bottom - this.SpriteMarkersTexture.Height / 2,
-                       SpriteMarkersTexture.Width, SpriteMarkersTexture.Height),
-                   Color.Red);
-                //Rect Bottom Right
-                sb.Draw(this.SpriteMarkersTexture,
-                   new Rectangle(markerRect.Right - this.SpriteMarkersTexture.Width / 2,
-                       markerRect.Bottom - this.SpriteMarkersTexture.Height / 2,
-                       SpriteMarkersTexture.Width, SpriteMarkersTexture.Height),
-                   Color.Red);
-
-                //location Marker
-                sb.Draw(this.SpriteMarkersTexture,
-                    new Rectangle((int)this.Location.X - this.SpriteMarkersTexture.Width / 2,
-                        (int)this.Location.Y - this.SpriteMarkersTexture.Height / 2,
-                        SpriteMarkersTexture.Width, SpriteMarkersTexture.Height),
-                    Color.Yellow);
-
-
-            }
+            return IntersectPixels(this.spriteTransform, 
+                this.currentTextureRect.Width,
+                this.currentTextureRect.Height, 
+                this.SpriteTextureData,
+                OtherSprite.spriteTransform,
+                OtherSprite.SpriteTexture.Width,
+                OtherSprite.SpriteTexture.Height,
+                OtherSprite.SpriteTextureData);
         }
     }
-
-
-
 
     public class SpriteAnimationAdapter
     {
         List<SpriteAnimation> spriteAnimations;
         protected SpriteAnimation currentAnimation;
         protected CelAnimationManager celAnimationManger;
+
+        protected Texture2D defaultTexture; //only used if no sprite animations are set
+        protected Sprite parent;
+        public bool HasAnimations
+        {
+            get
+            {
+                if (currentAnimation != null)
+                    return true;
+                return false;
+            }
+        }
 
         public Rectangle CurrentLocationRect
         {
@@ -217,21 +185,38 @@ namespace MonoGameLibrary.Sprite
             }
         }
               
-        public SpriteAnimationAdapter(Game game)
+        public SpriteAnimationAdapter(Game game, Sprite sprite)
         {
+            this.parent = sprite;
             spriteAnimations = new List<SpriteAnimation>();
             
             celAnimationManger = (CelAnimationManager)game.Services.GetService(typeof(ICelAnimationManager));
             if (celAnimationManger == null)
             {
-                throw new Exception("To use a DrawableAnimatedSprite you must a CelAnimationManager to the game as a service!");
+                //throw new Exception("To use a DrawableAnimatedSprite you must a CelAnimationManager to the game as a service!");
+                celAnimationManger = new CelAnimationManager(game);
+                game.Components.Add(celAnimationManger);
+            }   
+        }
+
+        public void LoadContent()
+        {
+            this.defaultTexture = parent.SpriteTexture;
+            if (parent.SpriteTexture == null)
+            {
+                parent.Initialize();
+                this.defaultTexture = parent.SpriteTexture;
             }
-            
         }
 
         public Texture2D CurrentTexture
         {
-            get { return celAnimationManger.GetTexture(currentAnimation.TextureName); }
+            get {
+                if(currentAnimation == null)
+                {
+                    return this.defaultTexture;
+                }
+                return celAnimationManger.GetTexture(currentAnimation.TextureName); }
         }
 
         public void AddAnimation(SpriteAnimation s)
@@ -273,9 +258,19 @@ namespace MonoGameLibrary.Sprite
             this.celAnimationManger.ToggleAnimation(s.AnimationName, false);
         }
 
+        public Rectangle GetCurrentDrawRect(float elapsedTime, float scale)
+        {
+            Rectangle drawRect;
+            if (this.HasAnimations)
+                drawRect = this.CelAnimationManager.GetCurrentDrawRect(elapsedTime, currentAnimation.AnimationName, scale);
+            else
+                drawRect = defaultTexture.Bounds;
+            return drawRect;
+        }
+
         public Rectangle GetCurrentDrawRect(float elapsedTime)
         {
-            return this.CelAnimationManager.GetCurrentDrawRect(elapsedTime, currentAnimation.AnimationName);
+            return GetCurrentDrawRect(0.0f, 0.0f);
         }
 
         public Rectangle GetCurrentDrawRect()
@@ -288,7 +283,10 @@ namespace MonoGameLibrary.Sprite
             return this.celAnimationManger.Animations[currentAnimation.AnimationName].LoopCount;
         }
 
-
+        internal void Initialize()
+        {
+            //throw new NotImplementedException();
+        }
     }
 
     public class SpriteAnimation 

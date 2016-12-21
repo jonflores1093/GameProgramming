@@ -18,30 +18,37 @@ namespace MonoGameLibrary.Util
 
     public interface IGameConsole
     {
-        string FontName { get; set;}
-        string DebugText { get; set; }
-        Dictionary<string, string> DebugTextOutput { get; set; }
+        string FontName { get; set;}    //Font to use for Game Console it must be loadable by pipline tool
+        string DebugText { get; set; }  //Text that displays on every frame
+        Dictionary<string, string> DebugTextOutput { get; set; } //Text that is added to the Debugtext with a specfic header
 
         string GetGameConsoleText();
-        void GameConsoleWrite(string s);
+        void GameConsoleWrite(string s);    //writes text to the game console
 
     }
 
     public class GameConsole : Microsoft.Xna.Framework.DrawableGameComponent, IGameConsole
     {
-        protected string fontName;
+        protected string fontName;  //Private instance data member for FontName
+
+        //Font to use for Game Console it must be loadable by pipline tool
         public string FontName { get { return fontName; } set { fontName = value; } }
 
         protected string debugText;
+        //Text shows on every frame all the time. Can be diffucult to use if logging lots of data to the screen
         public string DebugText { get { return debugText; } set { debugText = value; } }
 
         protected Dictionary<string, string> debugTextOutput;
+
+        //Dicationary of text to be logged to the screen on every frame simplifies use to DebugText
+        //The Key Value pair of this dictionary is added to each frames Debug Text as Key: Value
         public Dictionary<string, string> DebugTextOutput { get { return debugTextOutput; } set { debugTextOutput = value; } }
-        protected string debugTextOutString;
+        protected string debugTextOutString;  //used to create text for dictionary
         float debugTextStartX, debugTextStartY;
 
 
         protected int maxLines;
+        //Max lines for the console
         public int MaxLines { get { return maxLines; } set { maxLines = value; } }
 
         SpriteFont font;
@@ -50,6 +57,7 @@ namespace MonoGameLibrary.Util
         protected List<string> gameConsoleText;
         protected GameConsoleState gameConsoleState;
 
+        //Key to open and close console
         public Keys ToggleConsoleKey;
 
         InputHandler input;     //GameConsole depends on InputHandler
@@ -58,13 +66,13 @@ namespace MonoGameLibrary.Util
             : base(game)
         {
             // TODO: Construct any child components here
-            this.fontName = "Arial";
+            this.fontName = "Arial";        //default font
             this.gameConsoleText = new List<string>();
-            this.maxLines = 20;
+            this.maxLines = 20;             //deafult nuber of lines
             this.debugText = "Console default \ndebug text";
-            this.ToggleConsoleKey = Keys.OemTilde;
-            this.debugTextStartX = 400;
-            this.debugTextStartY = 0;
+            this.ToggleConsoleKey = Keys.OemTilde;  //default key
+            this.debugTextStartX = 400;     //Default locationX
+            this.debugTextStartY = 0;       //Default locationY
             
 
             this.debugTextOutput = new Dictionary<string, string>();

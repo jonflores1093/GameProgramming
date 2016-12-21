@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGameLibrary.Sprite2;
+using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
 using PacManGame;
 using System;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Pac
 {
-    public class MonogamePacMan : DrawableSprite2
+    public class MonogamePacMan : DrawableSprite
     {
         internal PlayerController controller { get; private set; }
         internal GameConsolePacMan PacMan

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary.Sprite;
-using MonoGameLibrary.Sprite2;
+using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
 using PacMan;
 using System;
@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Ghost
 {
-    class MonogameGhost : DrawableSprite2
+    class MonogameGhost : DrawableSprite
     {
         protected GameConsoleGhost ghost;
         public GameConsoleGhost Ghost
@@ -202,7 +202,7 @@ namespace Ghost
         }
 
 
-        //Possible move to Sprite2
+        //Possible move to Sprite
         public Vector2 GetRandomDirection()
         {
             Vector2 v = new Vector2((float)r.NextDouble() - 0.5f, (float)r.NextDouble() - 0.5f);

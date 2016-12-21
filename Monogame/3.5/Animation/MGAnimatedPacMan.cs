@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using MonoGameLibrary.Sprite2;
+using MonoGameLibrary.Sprite;
 using System;
 using System.Collections.Generic;
 using System.Linq;

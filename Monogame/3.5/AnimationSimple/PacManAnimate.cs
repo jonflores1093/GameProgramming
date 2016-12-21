@@ -7,14 +7,14 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using MonoGameLibrary.Sprite2;
+using MonoGameLibrary.Sprite;
 
 namespace AnimationSimple
 {
     /// <summary>
     /// This is a game component that implements IUpdateable.
     /// </summary>
-    public class PacManAnimate : Sprite2
+    public class PacManAnimate : Sprite
     {
 
         int framesizeX, framesizeY, maxFrame, currentFrame;

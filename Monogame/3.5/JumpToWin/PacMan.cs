@@ -8,12 +8,12 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
-using MonoGameLibrary.Sprite2;
+using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
 
 namespace JumpToWin
 {
-    class PacMan : DrawableSprite2
+    class PacMan : DrawableSprite
     {
 
         Vector2 GravityDir;

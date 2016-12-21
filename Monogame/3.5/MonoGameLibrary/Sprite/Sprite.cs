@@ -1,39 +1,53 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-//using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
-using Microsoft.Xna.Framework.Content; 
+//using Microsoft.Xna.Framework.GamerServices;
+
+
 
 namespace MonoGameLibrary.Sprite
 {
     /// <summary>
     /// This is a game component that implements DrawableGameComponent.
-    /// The Basic Sprite Class Cannot Draw itself it doesn't have a spriteBatch
+    /// The Basic Sprite Class Cannot Draw itself it doens't have a spriteBatch
     /// </summary>
     public class Sprite : Microsoft.Xna.Framework.DrawableGameComponent
     {
-        public Vector2 Location, Direction, Orgin;  //Origin starts at top left
+        public Vector2 Location, Direction, Origin;  //Origin starts at top left
         public float Speed, Rotate;
         public SpriteEffects SpriteEffects;
-        public Rectangle LocationRect { get { return locationRect; } set { locationRect = value; } }    //current location
-
+        public Rectangle LocationRect { get { return locationRect; } set { locationRect = value; } }    //current location used for collision
+                                                                             
+        public Color[] SpriteTextureData;
         public Texture2D spriteTexture;  //current Texture
-        protected Color[] spriteTextureData;
-        protected Matrix spriteTransform;
+        public Texture2D SpriteTexture
+        {
+            get { return spriteTexture; }
+            set
+            {
+                spriteTexture = value;
+                // Extract collision data
+                this.SpriteTextureData =
+                    new Color[this.spriteTexture.Width * this.spriteTexture.Height];
+                this.spriteTexture.GetData(this.SpriteTextureData);
+            }
+        }
+        
+        public Matrix spriteTransform;
         protected ContentManager content;
         protected GraphicsDeviceManager graphics;
-        protected float lastUpdateTime;
+        protected float lastUpdateTime;   
         protected Rectangle locationRect; //current location
+        private Rectangle rectangle; //used as drawing target
         protected float scale;
         public float Scale
         {
             get { return this.scale; }
-            set
-            {
+            set {
                 if (value != this.scale)
                 {
                     //reset spriteTransform and locationRect
@@ -45,7 +59,7 @@ namespace MonoGameLibrary.Sprite
 
         //SpriteMarkers are small dots that mark the locationRect and Origin of a sprite
         //showMarkers turns them on and off needs to be initially set in constructor
-        protected bool showMarkers;
+        protected bool showMarkers;    
         public bool ShowMarkers
         {
             get { return this.showMarkers; }
@@ -53,13 +67,15 @@ namespace MonoGameLibrary.Sprite
         }
         protected Texture2D SpriteMarkersTexture;
 
-
+        private Viewport vp;
         public Sprite(Game game)
             : base(game)
         {
             // TODO: Construct any child components here
             content = game.Content;
             this.Scale = 1;
+            rectangle = new Rectangle();
+            
         }
 
         /// <summary>
@@ -71,19 +87,19 @@ namespace MonoGameLibrary.Sprite
             // TODO: Add your initialization code here
             graphics = (GraphicsDeviceManager)Game.Services.GetService(typeof(IGraphicsDeviceManager));
             base.Initialize();
-            SpriteEffects = SpriteEffects.None;
+            SpriteEffects = SpriteEffects.None;  
         }
 
         protected override void LoadContent()
         {
-
-            //Load Sprite Markers texture
-            this.SpriteMarkersTexture = content.Load<Texture2D>("SpriteMarker");
+            //Load texture for sprite Markers
+           this.SpriteMarkersTexture = content.Load<Texture2D>("SpriteMarker");
             
             //top left orgin
-            this.Orgin = Vector2.Zero;
+            this.Origin = Vector2.Zero;
+            
             //center orgin
-            //this.Orgin = new Vector2(this.spriteTexture.Width / 2, this.spriteTexture.Height / 2);
+            //this.Origin = new Vector2(this.spriteTexture.Width / 2, this.spriteTexture.Height / 2);
             base.LoadContent();
         }
 
@@ -99,110 +115,80 @@ namespace MonoGameLibrary.Sprite
             //SpriteEffects = SpriteEffects.None;       //Default Sprite Effects
             SetTranformAndRect();
 
+            updateRectangeForDrawing();
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// TODO
-        /// </summary>
-        protected virtual void SetTranformAndRect()
+        private void updateRectangeForDrawing()
         {
+            rectangle.X = (int)Location.X;
+            rectangle.Y = (int)Location.Y;
+            rectangle.Width = (int)(spriteTexture.Width * this.Scale);
+            rectangle.Height = (int)(spriteTexture.Height * this.Scale);
+        }
 
-            try
+        public virtual void SetTranformAndRect()
+        {
+            //The first time this is called the spritetexture may not be loaded
+            //try and catch is too slow
+            if (this.spriteTexture != null)
             {
-                // Build the block's transform
-                spriteTransform =
-                    Matrix.CreateTranslation(new Vector3(this.Orgin, 0.0f)) *
-                    Matrix.CreateScale(this.Scale) *
-                    Matrix.CreateRotationZ(0.0f) *
-                    Matrix.CreateTranslation(new Vector3(this.Location, 0.0f));
+                    // Build the block's transform
+                    spriteTransform =
+                        Matrix.CreateTranslation(new Vector3(this.Origin * -1, 0.0f)) *
+                        Matrix.CreateScale(this.Scale) *
+                        Matrix.CreateRotationZ(0.0f) *
+                        Matrix.CreateTranslation(new Vector3(this.Location, 0.0f));
 
-                // Calculate the bounding rectangle of this block in world space
-                this.locationRect = CalculateBoundingRectangle(
-                         new Rectangle(0, 0, this.spriteTexture.Width,
-                             this.spriteTexture.Height),
-                         spriteTransform);
-            }
-            catch (NullReferenceException nu)
-            {
-                //nothing
-                if (this.spriteTexture == null)
-                {
-                    //first time this will fail because load content hasn't been called yet
-
-                }
-                else
-                {
-                    throw nu;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                    // Calculate the bounding rectangle of this block in world space
+                    this.locationRect = CalculateBoundingRectangle(
+                             new Rectangle(0, 0, (int)(this.spriteTexture.Width * Scale),
+                                 (int)(this.spriteTexture.Height * Scale)),
+                             spriteTransform);
             }
         }
 
-        /// <summary>
-        /// TODO
-        /// </summary>
-        /// <param name="sb"></param>
         public virtual void Draw(SpriteBatch sb)
         {
-            sb.Draw(spriteTexture,
-                new Rectangle(
-                    (int)Location.X,
-                    (int)Location.Y,
-                    (int)(spriteTexture.Width * this.Scale),
-                    (int)(spriteTexture.Height * this.Scale)),
+            sb.Draw(spriteTexture,  
+                rectangle,
                 null,
                 Color.White,
                 MathHelper.ToRadians(Rotate),
-                this.Orgin,
+                this.Origin,
                 SpriteEffects,
                 0);
-
-
+        
             DrawMarkers(sb);
-
         }
 
-        /// <summary>
-        /// TODO
-        /// </summary>
-        /// <param name="sb"></param>
-        protected virtual void DrawMarkers(SpriteBatch sb)
+        protected void DrawMarkers(SpriteBatch sb)
         {
             //Show markers on the location and rect of a sprite
             if (showMarkers)
             {
-                Rectangle markerRect = new Rectangle((int)(this.locationRect.X - this.Orgin.X * 2 * scale), 
-                    (int)(this.locationRect.Y - this.Orgin.Y * 2 * scale), 
-                    (int)(this.spriteTexture.Width * this.Scale),
-                    (int)(this.spriteTexture.Height * this.Scale));
                 
-                //Rectangle markerRect = this.locationRect;
-
                 //Rect Top Left
                 sb.Draw(this.SpriteMarkersTexture,
-                    new Rectangle(markerRect.Left - this.SpriteMarkersTexture.Width / 2,
-                        markerRect.Top - this.SpriteMarkersTexture.Height / 2,
+                    new Rectangle(this.locationRect.Left - this.SpriteMarkersTexture.Width/2,
+                        this.locationRect.Top - this.SpriteMarkersTexture.Height / 2, 
                         SpriteMarkersTexture.Width, SpriteMarkersTexture.Height),
                     Color.Red);
                 //Rect Top Right
                 sb.Draw(this.SpriteMarkersTexture,
-                   new Rectangle(markerRect.Right - this.SpriteMarkersTexture.Width / 2,
-                       markerRect.Top, SpriteMarkersTexture.Width, SpriteMarkersTexture.Height),
+                   new Rectangle(this.locationRect.Right - this.SpriteMarkersTexture.Width / 2,
+                       this.locationRect.Top, SpriteMarkersTexture.Width, SpriteMarkersTexture.Height),
                    Color.Red);
                 //Rect Bottom Left
                 sb.Draw(this.SpriteMarkersTexture,
-                   new Rectangle(markerRect.Left - this.SpriteMarkersTexture.Width / 2,
-                       markerRect.Bottom - this.SpriteMarkersTexture.Height / 2,
+                   new Rectangle(this.locationRect.Left - this.SpriteMarkersTexture.Width / 2,
+                       this.locationRect.Bottom - this.SpriteMarkersTexture.Height / 2,
                        SpriteMarkersTexture.Width, SpriteMarkersTexture.Height),
                    Color.Red);
                 //Rect Bottom Right
                 sb.Draw(this.SpriteMarkersTexture,
-                   new Rectangle(markerRect.Right - this.SpriteMarkersTexture.Width / 2,
-                       markerRect.Bottom - this.SpriteMarkersTexture.Height / 2,
+                   new Rectangle(this.locationRect.Right - this.SpriteMarkersTexture.Width / 2,
+                       this.locationRect.Bottom - this.SpriteMarkersTexture.Height / 2,
                        SpriteMarkersTexture.Width, SpriteMarkersTexture.Height),
                    Color.Red);
 
@@ -213,18 +199,8 @@ namespace MonoGameLibrary.Sprite
                         SpriteMarkersTexture.Width, SpriteMarkersTexture.Height),
                     Color.Yellow);
 
-
+                
             }
-        }
-
-        /// <summary>
-        /// TODO
-        /// </summary>
-        /// <param name="NewTextureName"></param>
-        public void ChangeTexture(string NewTextureName)
-        {
-            this.spriteTexture = content.Load<Texture2D>(NewTextureName);
-
         }
 
         /// <summary>
@@ -237,10 +213,24 @@ namespace MonoGameLibrary.Sprite
         /// viewport.</returns>
         protected Vector2 clampToViewport(Vector2 vector)
         {
-            Viewport vp = graphics.GraphicsDevice.Viewport;
+            vp = graphics.GraphicsDevice.Viewport;
             vector.X = MathHelper.Clamp(vector.X, vp.X, vp.X + vp.Width);
             vector.Y = MathHelper.Clamp(vector.Y, vp.Y, vp.Y + vp.Height);
             return vector;
+        }
+
+        public virtual bool IsOffScreen()
+        {
+            vp = graphics.GraphicsDevice.Viewport;
+            if((this.Location.X + this.SpriteTexture.Width ) <= (0 - this.Origin.X) || 
+                this.Location.X >= (vp.Width - this.Origin.X) ||
+                (this.Location.Y + this.SpriteTexture.Height) <= (0 - this.Origin.Y) ||
+                this.Location.Y - this.SpriteTexture.Height >= (vp.Height - this.Origin.Y))
+            {
+                return true;
+            }
+            
+            return false;
         }
 
         #region Sprite Collision
@@ -250,20 +240,20 @@ namespace MonoGameLibrary.Sprite
         /// </summary>
         /// <param name="OtherSprite">Other Sprite</param>
         /// <returns>true if the two sprites intersect otherwise returns false</returns>
-        public virtual bool Intersects(Sprite OtherSprite)
+        public bool Intersects(Sprite OtherSprite)
         {
             return Sprite.Intersects(this.locationRect, OtherSprite.locationRect);
         }
 
         /// <summary>
         /// Checks if this sprites pixels intersect with another sprite
-        /// This is more painful than checking rectangles
+        /// This is more painfull than checking rectangles
         /// </summary>
         /// <param name="OtherSprite"></param>
         /// <returns></returns>
         public bool PerPixelCollision(Sprite OtherSprite)
         {
-
+            
             Color[] OtherSpriteColors;
             Color[] SpriteColors;
 
@@ -274,7 +264,7 @@ namespace MonoGameLibrary.Sprite
              * device, or after it has been used within a tiling bracket.
              */
 
-            OtherSpriteColors = new Color[OtherSprite.spriteTexture.Width *
+            OtherSpriteColors = new Color[OtherSprite.spriteTexture.Width * 
                 OtherSprite.spriteTexture.Height];
             SpriteColors = new Color[this.spriteTexture.Width * this.spriteTexture.Height];
 
@@ -282,7 +272,7 @@ namespace MonoGameLibrary.Sprite
 
             OtherSprite.spriteTexture.GetData<Color>(OtherSpriteColors);
 
-            return IntersectPixels(this.locationRect, SpriteColors,
+            return IntersectPixels(this.locationRect, SpriteColors, 
                 OtherSprite.locationRect, OtherSpriteColors);
         }
 
@@ -292,20 +282,19 @@ namespace MonoGameLibrary.Sprite
         /// </summary>
         /// <param name="OtherSprite"></param>
         /// <returns></returns>
-        public bool PerPixelCollision2(Sprite OtherSprite)
+        public virtual bool PerPixelCollision2(Sprite OtherSprite)
         {
-
-
+            
             return IntersectPixels(this.spriteTransform, this.spriteTexture.Width,
-                this.spriteTexture.Height, this.spriteTextureData,
+                this.spriteTexture.Height, this.SpriteTextureData,
                 OtherSprite.spriteTransform, OtherSprite.spriteTexture.Width,
                 OtherSprite.spriteTexture.Height,
-                OtherSprite.spriteTextureData);
-
+                OtherSprite.SpriteTextureData);
+                
         }
-
+        
         /// <summary>
-        /// Checks if two rectanges intersect
+        /// Checks if two rectangles intersect
         /// </summary>
         /// <param name="a">Rectangle A</param>
         /// <param name="b">Rectangle B</param>
@@ -313,14 +302,12 @@ namespace MonoGameLibrary.Sprite
         public static bool Intersects(Rectangle a, Rectangle b)
         {
             // check if two Rectangles intersect
-            //return (a.Right > b.Left && a.Left < b.Right &&
-            //        a.Bottom > b.Top && a.Top < b.Bottom);
-
-            return a.Intersects(b);
+            return (a.Right > b.Left && a.Left < b.Right &&
+                    a.Bottom > b.Top && a.Top < b.Bottom);
         }
 
         /// <summary>
-        /// Checks if two rectangles intersect
+        /// Checks if two rectanges intersect
         /// </summary>
         /// <param name="rectangle1"></param>
         /// <param name="rectangle2"></param>
@@ -354,7 +341,7 @@ namespace MonoGameLibrary.Sprite
         /// </summary>
         /// <param name="rectangleA">Bounding rectangle of the first sprite</param>
         /// <param name="dataA">Pixel data of the first sprite</param>
-        /// <param name="rectangleB">Bounding rectangle of the second sprite</param>
+        /// <param name="rectangleB">Bouding rectangle of the second sprite</param>
         /// <param name="dataB">Pixel data of the second sprite</param>
         /// <returns>True if non-transparent pixels overlap; false otherwise</returns>
         public static bool IntersectPixels(Rectangle rectangleA, Color[] dataA,
@@ -371,7 +358,9 @@ namespace MonoGameLibrary.Sprite
             {
                 for (int x = left; x < right; x++)
                 {
+                    
                     // Get the color of both pixels at this point
+                    
                     Color colorA = dataA[(x - rectangleA.Left) +
                                          (y - rectangleA.Top) * rectangleA.Width];
                     Color colorB = dataB[(x - rectangleB.Left) +
@@ -454,10 +443,11 @@ namespace MonoGameLibrary.Sprite
                         }
                         catch
                         {
+                            //HUH?
                             //throw ex;
                             return false;
                         }
-
+                        
                     }
 
                     // Move to the next pixel in the row
@@ -478,7 +468,7 @@ namespace MonoGameLibrary.Sprite
         /// </summary>
         /// <param name="rectangle">Original bounding rectangle.</param>
         /// <param name="transform">World transform of the rectangle.</param>
-        /// <returns>A new rectangle which contains the transformed rectangle.</returns>
+        /// <returns>A new rectangle which contains the trasnformed rectangle.</returns>
         public static Rectangle CalculateBoundingRectangle(Rectangle rectangle,
                                                            Matrix transform)
         {

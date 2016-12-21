@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGameLibrary.Sprite2;
+using MonoGameLibrary.Sprite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,7 @@ namespace Collision
         Spawning, Stopped, Roving, Chasing, Evading, Dying, Dead
     }
 
-    class Ghost : DrawableSprite2
+    class Ghost : DrawableSprite
     {
         
         //Static

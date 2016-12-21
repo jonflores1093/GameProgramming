@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 
-namespace PacManSprite2Component
+namespace PacManSpriteComponent
 {
     class PacMan : DrawableSprite
     {

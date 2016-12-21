@@ -8,12 +8,12 @@ using MonoGameLibrary.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MonoGameLibrary.Sprite2;
+using MonoGameLibrary.Sprite;
 
 namespace ShotManager
 {
 
-    public class Shot : Sprite2
+    public class Shot : Sprite
     {
         float elapsedtime;
         public Vector2 StartLocation { get; set; }

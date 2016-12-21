@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PacManSprite2Component
+namespace PacManSpriteComponent
 {
 #if WINDOWS || LINUX
     /// <summary>

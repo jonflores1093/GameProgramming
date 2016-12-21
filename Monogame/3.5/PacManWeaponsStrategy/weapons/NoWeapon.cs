@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
-using MonoGameLibrary.Sprite2;
+using MonoGameLibrary.Sprite;
 using PacManWeaponsStrategy;
 
 namespace StrategyPacMan.weapons

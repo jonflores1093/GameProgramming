@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGameLibrary.Sprite2;
+using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace PacManGame.Food
 {
     public enum FoodState { NotEaten, Eaten }
 
-    class Food : Sprite2
+    class Food : Sprite
     {
         GameConsole console;
         protected FoodState _state;

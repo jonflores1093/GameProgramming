@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 
-namespace PacManSprite2Component
+namespace PacManSpriteComponent
 {
     /// <summary>
     /// This is a game component that implements IUpdateable.
