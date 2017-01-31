@@ -60,6 +60,7 @@
     <Compile Include="Sprite\DrawableSprite.cs" />
     <Compile Include="Sprite\Sprite.cs" />
     <Compile Include="Sprite\CelAnimationManager.cs" />
+    <Compile Include="Sprite\SpriteBatchExtensionMethods.cs" />
     <Compile Include="State\GameState.cs" />
     <Compile Include="State\GameStateManager.cs" />
     <Compile Include="ThreeD\Camera.cs" />

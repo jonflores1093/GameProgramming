@@ -18,16 +18,16 @@ namespace SimpleMovementJump
         Vector2 PacManLoc, PacManDir;
         float PacManSpeedMax;           //Max speed for the pac man sprite
 
-        Vector2 GravityDir;
-        float GravityAccel;
-        float Friction;
-        float Accel = 10;
-        int jumpHeight = -200;
+        Vector2 GravityDir;             //Direction for gravity
+        float GravityAccel;             //Acceloration from gravity
+        float Friction;                 //Friction to slow down when no input is set
+        float Accel = 10;               //Acceloration
+        int jumpHeight = -200;          //Jump impulse
 
-        bool isOnGround;
+        bool isOnGround;                //Hack to stop falling at a certian point 
 
-        KeyboardHandler inputKeyboard;
-        //GameConsole gameConsole;
+        KeyboardHandler inputKeyboard;  //Instance of class that handles keyboard input
+        
 
         public Game1()
         {
@@ -46,7 +46,6 @@ namespace SimpleMovementJump
         protected override void Initialize()
         {
             
-
             base.Initialize();
         }
 
@@ -60,12 +59,16 @@ namespace SimpleMovementJump
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             PacMan = Content.Load<Texture2D>("pacManSingle");
+            //Place pacman at the center of the screen
             PacManLoc = new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
+
+            //In the sample Direction also has magnitude
             PacManDir = new Vector2(50, 0);
+
             PacManSpeedMax = 200;
 
-            GravityDir = new Vector2(0, 1);
-            GravityAccel = 6.0f;
+            GravityDir = new Vector2(0, 1);     //Gravity direction starts as down
+            GravityAccel = 6.0f;            
             Friction = 8.0f;
             isOnGround = false;
         }
@@ -96,18 +99,18 @@ namespace SimpleMovementJump
             //Time corrected move. MOves PacMan By PacManDiv every Second
             PacManLoc = PacManLoc + ((PacManDir * (time / 1000)));      //Simple Move PacMan by PacManDir
 
-            //Gravity
+            //Gravity also affects pacman
             PacManDir = PacManDir + (GravityDir * GravityAccel);
 
             UpdateKeepPacmanOnScreen();
             UpdateInputFromKeyboard();
-
-            //gameConsole.DebugText = String.Format("PacManDir:{0}\nGravityAccel:{1}\njumpHeight:{2}",
-            //    PacManDir.ToString(), GravityAccel, jumpHeight);
-
+            
             base.Update(gameTime);
         }
 
+        /// <summary>
+        /// Keeps pac man on screen
+        /// </summary>
         private void UpdateKeepPacmanOnScreen()
         {
             //Keep PacMan On Screen
@@ -126,6 +129,7 @@ namespace SimpleMovementJump
 
             //Y stop at 400
             //Hack Floor location is hard coded
+            //TODO viloates single resposibilty principle should be moved to it's own method
             if (PacManLoc.Y > 400)
             {
                 PacManLoc.Y = 400;
@@ -134,21 +138,21 @@ namespace SimpleMovementJump
             }
         }
 
+
         private void UpdateInputFromKeyboard()
         {
             inputKeyboard.Update();
+            //Jump
             if (inputKeyboard.WasKeyPressed(Keys.Up))
             {
                 PacManDir = PacManDir + new Vector2(0, jumpHeight);
-                isOnGround = false;
+                isOnGround = false; //remove onGround bool so gravity will kick in again
             }
-
-
-
+            
             if (isOnGround)
             {
-
-
+                //Allows left and right movement on ground 
+                //This way you cannot change direction in the air this is a design descision
                 if ((!(inputKeyboard.IsHoldingKey(Keys.Left))) &&
                     (!(inputKeyboard.IsHoldingKey(Keys.Right))))
                 {
@@ -174,15 +178,22 @@ namespace SimpleMovementJump
                 }
             }
 
+#if DEBUG
+            /* 
+             * These settings are for testing gravity values and should be removed before final game release
+             * The preprocessor directive #if DEBIG will remove this section when built in release mode
+             */
+            //A key changes gravity up
             if (inputKeyboard.WasKeyPressed(Keys.A))
             {
                 GravityAccel = GravityAccel + 0.2f;
             }
+            //Z key changes gravity down
             if (inputKeyboard.WasKeyPressed(Keys.Z))
             {
                 GravityAccel = GravityAccel - 0.2f;
             }
-
+            //S key changes jump up
             if (inputKeyboard.WasKeyPressed(Keys.S))
             {
                 jumpHeight = jumpHeight + 10;
@@ -191,6 +202,10 @@ namespace SimpleMovementJump
             {
                 jumpHeight = jumpHeight - 10;
             }
+            /*
+             * We could also change gravity direction here
+             */
+        #endif
         }
 
         /// <summary>

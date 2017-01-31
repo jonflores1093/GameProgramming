@@ -13,7 +13,8 @@ using MonoGameLibrary.Util;
 
 namespace PacManComponentFromLibrary
 {
-    class PacMan : DrawableSprite
+    //Set back to sprite to test with extension methods
+    class PacMan : Sprite
     {
         int playerIndex; //player index for controller
 

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGameLibrary.Util;
+using MonoGameLibrary.Sprite.Extensions;
 
 namespace PacManComponentFromLibrary
 {
@@ -87,6 +88,11 @@ namespace PacManComponentFromLibrary
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            spriteBatch.Begin();
+            //Extension method from MonoGameLibrary.Sprite.Extensions
+            //spriteBatch.DrawSprite(pacMan);
+            spriteBatch.DrawSpriteWithShadow(pacMan);
+            spriteBatch.End();
             
 
             base.Draw(gameTime);

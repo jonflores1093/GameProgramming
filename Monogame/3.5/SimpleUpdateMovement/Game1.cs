@@ -15,22 +15,25 @@ namespace SimpleUpdateMovement
         Texture2D PacMan;
         Vector2 PacManLoc;      //Pacman location
         Vector2 PacManDir;      //Pacman direction
-        float PacManSpeed ; //speed for the PacMan Sprite in pixels per frame per second
+        float PacManSpeed ;     //speed for the PacMan Sprite in pixels per frame per second
 
         
-        SpriteFont font;
+        SpriteFont font;        //Font created as a spritefont using the mgcb pipeline tool
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
+            //Uncomment these line to chanhe the window resolution
             //graphics.PreferredBackBufferHeight = 720;
             //graphics.PreferredBackBufferWidth = 1280;
+
+            //Uncomment to change to full screen
             //graphics.ToggleFullScreen();  //changes to fullscreen
 
             //Change the framerate of the game to 30 frames per second
-            //This is used to show how time changes animation speed or better yet that is shouldn't
+            //This is used to show how time changes animation speed or better yet that is shouldn't we will test this in class
             //TargetElapsedTime = TimeSpan.FromTicks(333333);
         }
 
@@ -89,16 +92,15 @@ namespace SimpleUpdateMovement
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-
             //Elapsed time since last update will be used to correct movement speed
             float time = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             //Move PacMan
             //Simple move Moves PacMac by PacManDiv on every update
-            //PacManLoc = PacManLoc + PacManDir * PacManSpeed;
+            PacManLoc = PacManLoc + PacManDir * PacManSpeed;
 
             //Time corrected move. MOves PacMan By PacManDiv every Second
-            PacManLoc = PacManLoc + ((PacManDir * PacManSpeed) * (time / 1000));      //Simple Move PacMan by PacManDir
+            //PacManLoc = PacManLoc + ((PacManDir * PacManSpeed) * (time / 1000));      //Simple Move PacMan by PacManDir
 
             UpatePacmanKeepOnScreen();
 
@@ -124,20 +126,28 @@ namespace SimpleUpdateMovement
             }
         }
 
+        /// <summary>
+        /// Changes pacmans speec bases on if a key is pressed or not
+        /// </summary>
         private void UpdatePacmanSpeed()
         {
             //Speed for next frame
             if (Keyboard.GetState().GetPressedKeys().Length > 0)
             {
+                //If a key is press set the speed to 200
                 PacManSpeed = 200;
             }
             else
             {
-                PacManSpeed = 0;
+                PacManSpeed = 0;    //no key no speed if we didn't do this pacman would continue going the direction of the previous
+                                    //key press even after it has been released
             }
             
         }
 
+        /// <summary>
+        /// Uses Keyboard Getstate to test for keys press on each update
+        /// </summary>
         private void UpdateKeyboardInput()
         {
             #region Keyboard Movement
@@ -164,7 +174,6 @@ namespace SimpleUpdateMovement
                 PacManDir.Normalize();
             }
             #endregion
-
             
         }
 
@@ -177,9 +186,8 @@ namespace SimpleUpdateMovement
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            spriteBatch.Draw(PacMan, PacManLoc, Color.White);
+            spriteBatch.Draw(PacMan, PacManLoc, Color.White);   //Draw the pacman
             spriteBatch.End();
-
 
             base.Draw(gameTime);
         }

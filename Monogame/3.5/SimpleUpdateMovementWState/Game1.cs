@@ -135,9 +135,11 @@ namespace SimpleUpdateMovementWState
             //Handle movement modes
             switch (currentMovementState)
             {
+                //Simple movement always moves at speed 200
                 case PacManMovementState.Continuious:
                     PacManSpeed = 200;
                     break;
+                //In no keys are pressed speed is 0 otherwise it's 200
                 case PacManMovementState.OnKey:
                     if (Keyboard.GetState().GetPressedKeys().Length > 0) //If there is any key press the legth of the Array of keys returned by GetPressedKeys wil be greater that 0
                     {
@@ -148,6 +150,7 @@ namespace SimpleUpdateMovementWState
                         PacManSpeed = 0;
                     }
                     break;
+                //Moves Pacman bassed on acceloration it's floaty or like on ice
                 case PacManMovementState.Momentum:
                     //slowdown no keys pressed accelerate on keys
                     if (Keyboard.GetState().GetPressedKeys().Length == 0) //If there is any key press the legth of the Array of keys returned by GetPressedKeys wil be greater that 0
@@ -165,6 +168,7 @@ namespace SimpleUpdateMovementWState
                         }
                     }
                     break;
+                //Really floaty  more like pushing pacman in he direction you want
                 case PacManMovementState.Influnence:
                     PacManSpeed = 1;
                     if (PacManDir.Length() - PacManSpeed > PacManMaxSpeed)  //Pac man is moving but not at his max speed
