@@ -113,13 +113,13 @@ namespace SimpleMovementWRotate
 
             UpdateKeyboardInput();
 
-            //Angle in radians from vector
+            //Angle in radians from vector2
             float RotationAngleKey = (float)System.Math.Atan2(
                     PacManDir.X,
-                    PacManDir.Y * -1);
+                    PacManDir.Y * -1); //y axis is flipped already
             //Find angle in degrees
             PacManRotate = (float)MathHelper.ToDegrees(
-                RotationAngleKey - (float)(Math.PI / 2)); //rotated right already
+                RotationAngleKey - (float)(Math.PI / 2)); //image is rotated facing right already hence the -1/2 PI
 
 
             base.Update(gameTime);
