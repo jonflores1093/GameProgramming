@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PacManSpriteComponent.Sprite" Collapsed="true">
+    <Position X="5.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAEEAAAAAAwAAACIAAAABEAAAAEgAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacManSpriteComponent.DrawableSprite" Collapsed="true">
+    <Position X="7.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAEEAAAAAAwAAACIAAAABEAAAAEgAAAAAAAAAAAQ=</HashCode>
+      <FileName>DrawableSprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacManSpriteComponent.PacMan">
+    <Position X="5.5" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAwAAAAIAAAAAAAAAAAAAAAAAACAgAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>PacMan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacManSpriteComponent.Ghost">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQ=</HashCode>
+      <FileName>Ghost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PacManSpriteComponent.KeyboardHandler">
+    <Position X="3.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAIAIAAgAAAAAAAAAAAAAAAAAAAAACBAQAQAAAA=</HashCode>
+      <FileName>KeyboardHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
