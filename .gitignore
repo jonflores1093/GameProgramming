@@ -189,3 +189,8 @@ FakesAssemblies/
 
 #unity library
 Library/
+/jeff/Monogame/3.5/.vs/MonogameDemos/v16/Server/sqlite3/db.lock
+/jeff/Monogame/3.5/.vs/MonogameDemos/v16/Server/sqlite3/storage.ide
+/jeff/Monogame/3.5/.vs/MonogameDemos/v16/Server/sqlite3/storage.ide-wal
+/jeff/Monogame/3.5/.vs/MonogameDemos/v16/Server/sqlite3/storage.ide-shm
+/.vs/slnx.sqlite
