@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.Scripts.PacMan;
 
-public class UnityPacMan : PacMan {
+public class UnityPacMan : PacMan, ILoggable
+{
 
     private GameObject _gameObject;
+    public bool _debug { get; protected set; }
 
     public UnityPacMan(GameObject g) : base()
     {
@@ -12,7 +15,7 @@ public class UnityPacMan : PacMan {
 
     public override void Log(string s)
     {
-        Debug.Log(s);
+        if(_debug)Debug.Log(s);
     }
 	
 }

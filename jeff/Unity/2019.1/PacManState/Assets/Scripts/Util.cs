@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.Scripts.PacMan;
 
 public class Util : MonoBehaviour {
 
-	static Vector3 bottomLeft; 
-	static Vector3 topRight;
-	static Rect cameraRect;
+    static Vector3 bottomLeft;
+    static Vector3 topRight;
+    static Rect cameraRect;
+    
 	
 	// Use this for initialization
 	void Start () {
@@ -77,6 +79,6 @@ public class Util : MonoBehaviour {
 	{
 		return Random.Range(1,max);
 	}
-	
-	
+
+    
 }

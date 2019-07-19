@@ -190,6 +190,24 @@ PrefabInstance:
       propertyPath: PacMan
       value: 
       objectReference: {fileID: 131656613}
+    - target: {fileID: 114000014136849684, guid: d14274b32b26103419d76f70be3b3423,
+        type: 3}
+      propertyPath: DeadTexture
+      value: 
+      objectReference: {fileID: 21300000, guid: 00328e8e68a355045ac591a0e325e108,
+        type: 3}
+    - target: {fileID: 114000014136849684, guid: d14274b32b26103419d76f70be3b3423,
+        type: 3}
+      propertyPath: NormalTexture
+      value: 
+      objectReference: {fileID: 21300000, guid: f235d58ac150ac64f87a879be21ea97e,
+        type: 3}
+    - target: {fileID: 114000014136849684, guid: d14274b32b26103419d76f70be3b3423,
+        type: 3}
+      propertyPath: EvadeTexture
+      value: 
+      objectReference: {fileID: 21300000, guid: 123f887de94191441a2f9b171be95d4e,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d14274b32b26103419d76f70be3b3423, type: 3}
 --- !u!1 &1401563098
@@ -204,7 +222,6 @@ GameObject:
   - component: {fileID: 1401563102}
   - component: {fileID: 1401563101}
   - component: {fileID: 1401563100}
-  - component: {fileID: 1401563099}
   m_Layer: 0
   m_Name: GhostRed1
   m_TagString: Untagged
@@ -212,19 +229,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1401563099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 11400000, guid: 59e9884466ca3c647bf86bcd081fa731,
-    type: 2}
-  m_PrefabInstance: {fileID: 2146390317}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401563098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdde0adfdf0cf324b97c413dad72cc66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &1401563100
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -325,11 +329,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 400000, guid: 8152c6d2f7fe1e44f8ac7adb496143eb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.7816072
+      value: -3.38
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8152c6d2f7fe1e44f8ac7adb496143eb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.5285969
+      value: -2.55
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8152c6d2f7fe1e44f8ac7adb496143eb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -370,7 +374,6 @@ GameObject:
   - component: {fileID: 1779256649}
   - component: {fileID: 1779256648}
   - component: {fileID: 1779256647}
-  - component: {fileID: 1779256652}
   - component: {fileID: 1779256653}
   m_Layer: 0
   m_Name: Main Camera
@@ -460,18 +463,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1779256652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1779256646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74cdc12057d54db4492451e90e8f3bb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1779256653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -531,5 +522,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 59e9884466ca3c647bf86bcd081fa731, type: 2}

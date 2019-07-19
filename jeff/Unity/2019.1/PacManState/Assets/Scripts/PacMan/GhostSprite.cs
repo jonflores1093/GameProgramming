@@ -1,21 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.Scripts.PacMan;
 
 public class GhostSprite : MonoBehaviour {
 
 	public GameObject PacMan;
 	public GhostState State;
-	private Ghost ghost;
-    public Ghost Ghost { get { return this.ghost; } }
+	private UnityGhost ghost;
+    public UnityGhost Ghost { get { return this.ghost; } }
 	public float Speed;
 	
 	private Vector3 moveTranslation;
 	SpriteRenderer spriteRenderer;
     
-    public Sprite EvadeTexture, NormalTexture;
+    public Sprite EvadeTexture, NormalTexture, DeadTexture;
 
     protected Vector3 viewPoint;
-    protected GhostController controller;
+    protected GhostController controller;   //Controller decides which direction ghost moves
 	
 	// Use this for initialization
 	void Start () {
@@ -25,14 +26,15 @@ public class GhostSprite : MonoBehaviour {
 
     public virtual void SetupGhost()
     {
-        this.ghost = new Ghost();
+        this.ghost = new UnityGhost(this.gameObject);
         Util.GetComponentIfNull<SpriteRenderer>(this, ref spriteRenderer);
         this.State = this.ghost.State;
         this.spriteRenderer = this.GetComponent<SpriteRenderer>();
         this.controller = this.GetComponent<GhostController>();
-        //Set Textures with script rather than UI
+        //Set Textures with script rather than UI textures need to be in Resources folder
         NormalTexture = Resources.Load<Sprite>("Artwork/RedGhost");
         EvadeTexture = Resources.Load<Sprite>("Artwork/GhostHit");
+        DeadTexture = Resources.Load<Sprite>("Artwork/DeadGhost");
 
     }
 
@@ -50,26 +52,32 @@ public class GhostSprite : MonoBehaviour {
         this.spriteRenderer.sprite = EvadeTexture;
     }
 
-    protected virtual void ChangeGhostTectureToBlack()
+    protected virtual void ChangeGhostTectureToDead()
     {
         //Change texture if evading
-        this.spriteRenderer.color = Color.grey;
-        this.spriteRenderer.sprite = EvadeTexture;
+        //this.spriteRenderer.color = Color.grey; //for shading effect don't use this anymore
+        this.spriteRenderer.sprite = DeadTexture;
     }
 
     void OnTriggerEnter2D(Collider2D coll) {
         if (coll.gameObject.tag == "Player") //Make sure player is tagged 
         {
-            if (this.State == GhostState.Dead)
+
+            switch(this.State)
             {
-                Debug.Log(string.Format("{0} triggerEnter with {1} already dead change to Roving", this, coll.ToString()));
-                this.State = GhostState.Roving;
+                case GhostState.Roving:
+                    this.ghost.Log(string.Format("{0} triggerEnter with {1} already dead change to Roving", this, coll.ToString()));
+                    this.State = GhostState.Roving;
+                    break;
+                case GhostState.Dead:
+                case GhostState.Evading:
+                case GhostState.Chasing:
+                    this.ghost.Log(string.Format("{0} triggerEnter with {1} change to dead", this, coll.ToString()));
+                    this.State = GhostState.Dead;
+                    break;
+                
             }
-            else
-            {
-                Debug.Log(string.Format("{0} triggerEnter with {1} change to dead", this, coll.ToString()));
-                this.State = GhostState.Dead;
-            }
+            
         }
 	}
 	
@@ -85,21 +93,11 @@ public class GhostSprite : MonoBehaviour {
         {
             case GhostState.Dead:
                 //change to dead texture
-                this.ChangeGhostTectureToBlack();
+                this.ChangeGhostTectureToDead();
                 break;
             case GhostState.Evading:
                 //Evade
-                //Change ghost tecture to blue
-
-                //Too close change direction
-                //if((PacMan.transform.position-this.transform.position).magnitude < 1)
-                //{
-                //    //change direction
-                //}
                 this.ChangeGhostTectureToBlue();
-                //Vector3 headingNeg = PacMan.transform.position - this.transform.position;
-                //headingNeg = Vector3.Normalize(headingNeg);
-                //this.ghost.Direction = headingNeg * -1;
                 break;
             case GhostState.Chasing:
                 this.ChangeGhostTextureToNormal();
@@ -108,27 +106,10 @@ public class GhostSprite : MonoBehaviour {
                     this.State = GhostState.Roving;
                     break;
                 }
-                //Vector3 heading = PacMan.transform.position - this.transform.position;
-                //heading = Vector3.Normalize(heading);
-                //this.ghost.Direction = heading;
-
+                
                 break;
             case GhostState.Roving:
                 this.ChangeGhostTextureToNormal();
-                //viewPoint = new Vector3(this.transform.position.x + (this.ghost.Direction.x * 5), this.transform.position.y + (this.ghost.Direction.y * 5));
-                //RaycastHit2D[] hit = Physics2D.LinecastAll(this.transform.position, this.viewPoint);
-                //Debug.DrawLine(this.transform.position, this.viewPoint, Color.green);
-
-                //for (int i = 0; i < hit.Length; i++)
-                //    if (hit[i].rigidbody != null)
-                //    {
-                //        if (hit[i].rigidbody.tag == "Player")
-                //        {
-                //            Debug.Log(string.Format("{0} saw {1} changed to chasing", this, hit[i].rigidbody.tag));
-                //            this.State = GhostState.Chasing;
-                //        }
-                //    }
-
                 break;
         }
 
@@ -140,9 +121,6 @@ public class GhostSprite : MonoBehaviour {
         {
             this.ghost.State = this.State;
         }
-
-
-
     }
 
     private void UpdateGhostLocation()
@@ -152,4 +130,6 @@ public class GhostSprite : MonoBehaviour {
         this.transform.position = new Vector3(this.transform.position.x + this.moveTranslation.x,
                                                     this.transform.position.y + this.moveTranslation.y);
     }
+
+    
 }

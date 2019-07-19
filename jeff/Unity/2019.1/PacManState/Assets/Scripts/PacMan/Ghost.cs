@@ -38,9 +38,14 @@ public class Ghost {
 	{
 		this.State = GhostState.Roving;
 	}
-	
-	
-	public void RandomDirection()
+
+    public virtual void Log(string s)
+    {
+        //nothing
+    }
+
+
+    public void RandomDirection()
 	{
 		//TODO use Random from mono instead of unity
 		this.Direction.x = Random.Range(-1,1);
