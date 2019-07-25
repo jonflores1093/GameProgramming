@@ -1,34 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Player : MonoBehaviour {
 
     private PlayerController controller;
     public Vector2 Direction = new Vector2(1, 0);
-    public float Speed = 10;
+    public float Speed = 5;
     public float Angle;
 
-    public UnityPacMan PacMan { get; private set; }
+    public PacMan PacMan { get; protected set; }
 
     private Vector3 moveTranslation;
     
     // Use this for initialization
 	void Start () {
-        //Get PlayerController from game object
-		controller = GetComponent<PlayerController>();
-		//Log error if controller is null will throw null refernece exception eventually
-		if (controller == null) {
-			Debug.LogWarning( "GetComponent of type " + typeof( PlayerController ) + " failed on " + this.name, this );
-		}
+        SetupPlayer();
+	}
 
-		//or
-		//Util.GetComponentIfNull<PlayerController> (this, ref controller);
+    protected virtual void SetupPlayer()
+    {
+        //Get PlayerController from game object
+        controller = GetComponent<PlayerController>();
+        //Log error if controller is null will throw null refernece exception eventually
+        if (controller == null)
+        {
+            Debug.LogWarning("GetComponent of type " + typeof(PlayerController) + " failed on " + this.name, this);
+        }
+
+        //or
+        //Util.GetComponentIfNull<PlayerController> (this, ref controller);
 
         PacMan = new UnityPacMan(this.gameObject);
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         UpdatePlayerController();
         UpdateMovePlayer();
