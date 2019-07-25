@@ -2,12 +2,13 @@
 using System.Collections;
 using Assets.Scripts.PacMan;
 
+[RequireComponent(typeof(GhostController))]
 public class GhostSprite : MonoBehaviour {
 
 	public GameObject PacMan;
 	public GhostState State;
-	private UnityGhost ghost;
-    public UnityGhost Ghost { get { return this.ghost; } }
+	protected Ghost ghost;
+    public Ghost Ghost { get { return this.ghost; } }
 	public float Speed;
 	
 	private Vector3 moveTranslation;
@@ -26,6 +27,7 @@ public class GhostSprite : MonoBehaviour {
 
     public virtual void SetupGhost()
     {
+
         this.ghost = new UnityGhost(this.gameObject);
         Util.GetComponentIfNull<SpriteRenderer>(this, ref spriteRenderer);
         this.State = this.ghost.State;
@@ -35,7 +37,7 @@ public class GhostSprite : MonoBehaviour {
         NormalTexture = Resources.Load<Sprite>("Artwork/RedGhost");
         EvadeTexture = Resources.Load<Sprite>("Artwork/GhostHit");
         DeadTexture = Resources.Load<Sprite>("Artwork/DeadGhost");
-
+        this.Ghost.Log($"{this} SetupGhost done");
     }
 
     protected virtual void ChangeGhostTextureToNormal()

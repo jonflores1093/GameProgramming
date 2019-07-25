@@ -11,7 +11,8 @@ namespace Assets.Scripts.PacMan
     /// </summary>
     interface ILoggable
     {
-        bool _debug { get; }
+        bool ShowDebug { get; }
         void Log(string s);
+        //void Log(string message, Object sender);
     }
 }

@@ -60,7 +60,7 @@ public class GhostController : MonoBehaviour {
                     {
                         if (hit[i].rigidbody.tag == "Player")
                         {
-                            Debug.Log(string.Format("{0} saw {1} changed to chasing", this, hit[i].rigidbody.tag));
+                            this.parent.Ghost.Log(string.Format("{0} saw {1} changed to chasing", this, hit[i].rigidbody.tag));
                             //Should this be a method call or should controller change state?
                             this.parent.State = GhostState.Chasing;
                         }

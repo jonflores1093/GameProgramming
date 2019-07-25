@@ -5,18 +5,33 @@ namespace Assets.Scripts.PacMan
 {
     public class UnityGhost : Ghost, ILoggable
     {
-        private GameObject _gameObject;
-        public bool _debug { get; protected set; }
+        protected GameObject _gameObject;
+        public bool ShowDebug { get; protected set; }
 
         public UnityGhost(GameObject g) : base()
         {
             _gameObject = g;
-            this._debug = true;
+            this.ShowDebug = true;
         }
 
         public override void Log(string s)
         {
-            if(_debug)Debug.Log(s);
+            if(ShowDebug) Debug.Log(s);
+        }
+    }
+
+    public class UnitGhostGameConsole : UnityGhost
+    {
+        IGameConsole console;
+
+        public UnitGhostGameConsole(GameObject g, IGameConsole console) : base(g)
+        {
+            this.console = console;
+        }
+
+        public override void Log(string s)
+        {
+            console.GameConsoleWrite(s);
         }
     }
 }

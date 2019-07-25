@@ -6,7 +6,7 @@ public class UnityPacMan : PacMan, ILoggable
 {
 
     private GameObject _gameObject;
-    public bool _debug { get; protected set; }
+    public bool ShowDebug { get; protected set; }
 
     public UnityPacMan(GameObject g) : base()
     {
@@ -15,7 +15,7 @@ public class UnityPacMan : PacMan, ILoggable
 
     public override void Log(string s)
     {
-        if(_debug)Debug.Log(s);
+        if(ShowDebug) Debug.Log(s);
     }
 	
 }

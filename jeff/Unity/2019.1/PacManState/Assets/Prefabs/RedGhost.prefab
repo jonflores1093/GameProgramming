@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4000011398096346}
   - component: {fileID: 212000010089471482}
   - component: {fileID: 114000014136849684}
+  - component: {fileID: 1649989286}
   m_Layer: 0
   m_Name: RedGhost
   m_TagString: Untagged
@@ -95,3 +96,20 @@ MonoBehaviour:
   PacMan: {fileID: 0}
   State: 2
   Speed: 5
+  EvadeTexture: {fileID: 0}
+  NormalTexture: {fileID: 0}
+  DeadTexture: {fileID: 0}
+--- !u!114 &1649989286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000011047298348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad61748b246dd0641a759c8db2a86a08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Direction: {x: 0, y: 0}
+  viewPoint: {x: 0, y: 0, z: 0}
