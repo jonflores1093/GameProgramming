@@ -29,6 +29,10 @@ public class UnityPacManWConsole : UnityPacMan
         this.console = console;
     }
 
+    /// <summary>
+    /// Log to game console
+    /// </summary>
+    /// <param name="s"></param>
     public override void Log(string s)
     {
         if (ShowDebug) this.console.GameConsoleWrite(s);
