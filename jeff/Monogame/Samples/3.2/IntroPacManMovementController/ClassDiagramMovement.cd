@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="IntroPacManMovementController.PacMan" Collapsed="true">
+    <Position X="0.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAgAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>PacMan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IntroPacManMovementController.MonoGamePacMan">
+    <Position X="0.75" Y="3.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAEAAAACACAAAAAAAAAAAAAAACAAAAQ=</HashCode>
+      <FileName>MonoGamePacMan.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="PacMan" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="IntroPacManMovementController.PacManController">
+    <Position X="4" Y="3.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAACAAAAAAEAAAABAAEAAAAAAAAAA=</HashCode>
+      <FileName>PacManController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="IntroPacManMovementController.PacManState" Collapsed="true">
+    <Position X="2.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAEAAAAACAAgAAAAAAAA=</HashCode>
+      <FileName>PacMan.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
