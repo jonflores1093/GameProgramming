@@ -46,7 +46,6 @@ namespace SimpleUpdateMovementWState
         protected override void Initialize()
         {
             
-
             base.Initialize();
         }
 

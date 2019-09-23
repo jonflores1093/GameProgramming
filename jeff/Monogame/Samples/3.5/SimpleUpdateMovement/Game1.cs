@@ -13,10 +13,10 @@ namespace SimpleUpdateMovement
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Texture2D PacMan;
-        Vector2 PacManLoc;
-        Vector2 PacManDir;
-        int PacManSpeed;
+        Texture2D PacMan;       //Texture for pacman
+        Vector2 PacManLoc;      //Location for pacman
+        Vector2 PacManDir;      //Direction for pacman
+        int PacManSpeed;        //Speed for pacman
         
         SpriteFont font;        //Font created as a spritefont using the mgcb pipeline tool
 
@@ -25,7 +25,7 @@ namespace SimpleUpdateMovement
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            //Uncomment these line to chanhe the window resolution
+            //Uncomment these line to change the window resolution
             graphics.PreferredBackBufferHeight = 720;
             graphics.PreferredBackBufferWidth = 1280;
 
@@ -68,7 +68,7 @@ namespace SimpleUpdateMovement
             PacManDir = new Vector2(0, 1);
 
             //Pacman speed 
-            PacManSpeed = 200;
+            PacManSpeed = 200; //200 dp per second
             
             font = Content.Load<SpriteFont>("Arial");
         }
@@ -140,7 +140,7 @@ namespace SimpleUpdateMovement
             //Speed for next frame
             if (Keyboard.GetState().GetPressedKeys().Length > 0)
             {
-                //If a key is press set the speed to 200
+                //If a key is press set the speed to 200 TODO swap out hard coded values
                 PacManSpeed = 200;
             }
             else
@@ -179,6 +179,8 @@ namespace SimpleUpdateMovement
             {
                 PacManDir.Normalize(); //keep the direction vector between -1 and 1
             }
+
+            //How can we rotate pacman?
             #endregion
             
         }
