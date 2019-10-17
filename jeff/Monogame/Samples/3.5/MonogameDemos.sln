@@ -77,8 +77,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrollingBackgound", "Scrol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplicationObserver", "ConsoleApplicationObserver\ConsoleApplicationObserver.csproj", "{CD02E043-B1B5-47DB-B373-3A507477E848}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MGObserver", "MGObserver\MGObserver.csproj", "{5A18E11C-FBBF-4752-90C2-4898DA689538}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FontsAndTexture2D", "FontsAndTexture2D\FontsAndTexture2D.csproj", "{1058F92B-7311-42F0-92B9-D91A801F823B}"
 EndProject
 Global
@@ -365,16 +363,6 @@ Global
 		{CD02E043-B1B5-47DB-B373-3A507477E848}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{CD02E043-B1B5-47DB-B373-3A507477E848}.Release|x86.ActiveCfg = Release|Any CPU
 		{CD02E043-B1B5-47DB-B373-3A507477E848}.Release|x86.Build.0 = Release|Any CPU
-		{5A18E11C-FBBF-4752-90C2-4898DA689538}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{5A18E11C-FBBF-4752-90C2-4898DA689538}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{5A18E11C-FBBF-4752-90C2-4898DA689538}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{5A18E11C-FBBF-4752-90C2-4898DA689538}.Debug|x86.ActiveCfg = Debug|x86
-		{5A18E11C-FBBF-4752-90C2-4898DA689538}.Debug|x86.Build.0 = Debug|x86
-		{5A18E11C-FBBF-4752-90C2-4898DA689538}.Release|Any CPU.ActiveCfg = Release|x86
-		{5A18E11C-FBBF-4752-90C2-4898DA689538}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{5A18E11C-FBBF-4752-90C2-4898DA689538}.Release|Mixed Platforms.Build.0 = Release|x86
-		{5A18E11C-FBBF-4752-90C2-4898DA689538}.Release|x86.ActiveCfg = Release|x86
-		{5A18E11C-FBBF-4752-90C2-4898DA689538}.Release|x86.Build.0 = Release|x86
 		{1058F92B-7311-42F0-92B9-D91A801F823B}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{1058F92B-7311-42F0-92B9-D91A801F823B}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{1058F92B-7311-42F0-92B9-D91A801F823B}.Debug|Mixed Platforms.Build.0 = Debug|x86

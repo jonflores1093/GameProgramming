@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace GameComponents
 {
+    /// <summary>
+    /// Demo PacMan class as game component
+    /// This class should be refactored further to inherit from a sprite class
+    /// </summary>
     class PacManSimpleComponent : DrawableGameComponent
     {
 

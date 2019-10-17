@@ -14,15 +14,21 @@ namespace FPS
 
 
         
-        FPSComponent fps;
+        FPSComponent fps;  //Demo of frame counting component
+        FPSClass fpsClass; //Demo of frame counting class
 
         public Game1()
         {
+            
+
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             fps = new FPSComponent(this, true, true);
             this.Components.Add(fps);
-            
+
+            fpsClass = new FPSClass(this); //Setup FPS class can't do this in the contructor as this class depends on a SpriteBatch and SpriteBatched can't be initialize until the graphics device is ready
+
+
         }
 
         /// <summary>
@@ -46,7 +52,6 @@ namespace FPS
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
             
         }
 
@@ -70,7 +75,7 @@ namespace FPS
                 Exit();
 
             
-
+            
             base.Update(gameTime);
         }
 
@@ -81,10 +86,7 @@ namespace FPS
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            
-
-            
-
+            fpsClass.Draw(gameTime);
             base.Draw(gameTime);
         }
     }

@@ -18,9 +18,20 @@ namespace FPS
         int FramesPerSecond;
         SpriteFont Font;
 
+        /// <summary>
+        /// FPSClass Constuctor
+        /// spritebatches cannot be initiallized unit the graphics device is ready
+        /// fonts can't be loaded until after initialize is called and the ConentManager is ready
+        /// </summary>
+        /// <param name="game"></param>
         public FPSClass(Game game)
         {
+            if(game.GraphicsDevice == null)
+                throw new Exception("SpriteBatches cannot be initiallized unit the graphics device is ready. You cannot runn this constuctor yet.");
             spriteBatch = new SpriteBatch(game.GraphicsDevice);
+
+            if (game.Content == null)
+                throw new Exception("fonts can't be loaded until after initialize is called and the ConentManager is ready. You cannot runn this constuctor yet.");
             Font = game.Content.Load<SpriteFont>("SpriteFont1");
         }
 
