@@ -19,8 +19,8 @@ namespace BreakoutTest
         private BlockState blockstate;
         public BlockState BlockState
         {
-            get { return this.block.BlockState = this.blockstate; } //encapulsate block.BlockState
-            set { this.block.BlockState = this.blockstate = value; }
+            get { return this.block.BlockState; } //encapulsate block.BlockState
+            set { this.block.BlockState =  value; }
         }
 
         public MonogameBlock(Game game)
@@ -33,6 +33,8 @@ namespace BreakoutTest
 
         protected virtual void updateBlockTexture()
         {
+
+            this.blockstate = this.block.BlockState;
             switch (block.BlockState)
             {
                 case BlockState.Normal:
