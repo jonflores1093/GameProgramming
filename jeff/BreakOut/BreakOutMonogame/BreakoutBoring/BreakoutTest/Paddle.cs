@@ -19,10 +19,14 @@ namespace BreakoutTest
         //Dependencies
         PaddleController controller;
         Ball ball;      //Need reference to ball for collision
+
+        bool autopaddle;  //cheat
         
         public Paddle(Game game, Ball b)
             : base(game)
         {
+
+            this.autopaddle = true;
             this.Speed = 200;
             this.ball = b;
             controller = new PaddleController(game, ball);
@@ -80,6 +84,12 @@ namespace BreakoutTest
             this.Location += this.Direction * (this.Speed * gameTime.ElapsedGameTime.Milliseconds / 1000);
 
             KeepPaddleOnScreen();
+
+            if(autopaddle && ball.State == BallState.Playing) //Alllow cheating
+            {
+                this.Location.X = ball.Location.X - ((int)this.spriteTexture.Width/2 * this.scale);
+            }
+
             base.Update(gameTime);
         }
 
