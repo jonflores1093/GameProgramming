@@ -44,7 +44,7 @@ namespace ShotManager
         {
             this.shots = new List<Shot>();
             this.shotsToRemove = new List<Shot>();
-            
+            s = new Shot(game);
         }
 
         #region Shoot
