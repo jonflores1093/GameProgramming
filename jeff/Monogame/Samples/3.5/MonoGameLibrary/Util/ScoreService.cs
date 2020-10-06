@@ -15,7 +15,8 @@ namespace MonoGameLibrary.Util
 
     public interface IScoreService
     {
-        //not the right way to do interfaces.
+        int CurrentScore { get; set; }
+        int HighScore { get; set; }
     }
     
     /// <summary>
@@ -25,6 +26,7 @@ namespace MonoGameLibrary.Util
     {
 
         public int CurrentScore { get; set; }
+        public int HighScore { get; set; }
         public Vector2 ScoreLoc { get; set; } 
         SpriteFont font;
         SpriteBatch sb;
